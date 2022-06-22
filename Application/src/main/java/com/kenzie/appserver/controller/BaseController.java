@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping("/")
     public ResponseEntity getServiceName() {
-        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
-        return responseEntity;
+        ResponseEntity responseeEntity = new ResponseEntity(HttpStatus.OK);
+        return responseeEntity;
     }
 }
