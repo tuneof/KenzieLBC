@@ -1,8 +1,8 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.ExampleRepository;
+import com.kenzie.appserver.repositories.RestaurantRepository;
 import com.kenzie.appserver.repositories.model.ExampleRecord;
-import com.kenzie.appserver.service.model.Example;
+import com.kenzie.appserver.service.model.Restaurant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,14 +13,14 @@ import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ExampleServiceTest {
-    private ExampleRepository exampleRepository;
-    private ExampleService exampleService;
+public class RestaurantServiceTest {
+    private RestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
     @BeforeEach
     void setup() {
-        exampleRepository = mock(ExampleRepository.class);
-        exampleService = new ExampleService(exampleRepository);
+        restaurantRepository = mock(RestaurantRepository.class);
+        restaurantService = new RestaurantService(restaurantRepository);
     }
     /** ------------------------------------------------------------------------
      *  exampleService.findById
@@ -36,13 +36,13 @@ public class ExampleServiceTest {
         record.setName("concertname");
 
         // WHEN
-        when(exampleRepository.findById(id)).thenReturn(Optional.of(record));
-        Example example = exampleService.findById(id);
+        when(restaurantRepository.findById(id)).thenReturn(Optional.of(record));
+        Restaurant restaurant = restaurantService.findById(id);
 
         // THEN
-        Assertions.assertNotNull(example, "The object is returned");
-        Assertions.assertEquals(record.getId(), example.getId(), "The id matches");
-        Assertions.assertEquals(record.getName(), example.getName(), "The name matches");
+        Assertions.assertNotNull(restaurant, "The object is returned");
+        Assertions.assertEquals(record.getId(), restaurant.getId(), "The id matches");
+        Assertions.assertEquals(record.getName(), restaurant.getName(), "The name matches");
     }
 
     @Test
@@ -50,13 +50,13 @@ public class ExampleServiceTest {
         // GIVEN
         String id = randomUUID().toString();
 
-        when(exampleRepository.findById(id)).thenReturn(Optional.empty());
+        when(restaurantRepository.findById(id)).thenReturn(Optional.empty());
 
         // WHEN
-        Example example = exampleService.findById(id);
+        Restaurant restaurant = restaurantService.findById(id);
 
         // THEN
-        Assertions.assertNull(example, "The example is null when not found");
+        Assertions.assertNull(restaurant, "The example is null when not found");
     }
 
 }
