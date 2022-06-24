@@ -9,7 +9,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import java.util.List;
 
 @DynamoDBTable(tableName = "Restaurant")
-public class Restaurant {
+public class RestaurantRecord {
 
     private String restaurantId;
     private int rating;
@@ -19,7 +19,7 @@ public class Restaurant {
     private String location;
     private List<String> menu;
 
-    @DynamoDBHashKey(attributeName = "RestaurantId")
+    @DynamoDBHashKey(attributeName = "restaurantId")
     public String getRestaurantId() {
         return restaurantId;
     }
@@ -28,7 +28,7 @@ public class Restaurant {
         this.restaurantId = restaurantId;
     }
 
-    @DynamoDBRangeKey(attributeName = "Rating")
+    @DynamoDBRangeKey(attributeName = "rating")
     public int getRating() {
         return rating;
     }
@@ -37,7 +37,7 @@ public class Restaurant {
         this.rating = rating;
     }
 
-    @DynamoDBAttribute(attributeName = "RestaurantName")
+    @DynamoDBAttribute(attributeName = "restaurantName")
     public String getRestaurantName() {
         return restaurantName;
     }
@@ -46,7 +46,7 @@ public class Restaurant {
         this.restaurantName = restaurantName;
     }
 
-    @DynamoDBAttribute(attributeName = "Status")
+    @DynamoDBAttribute(attributeName = "status")
     public String getStatus() {
         return status;
     }
@@ -55,7 +55,7 @@ public class Restaurant {
         this.status = status;
     }
 
-    @DynamoDBAttribute(attributeName = "Cuisine")
+    @DynamoDBAttribute(attributeName = "cuisine")
     public String getCuisine() {
         return cuisine;
     }
@@ -64,7 +64,7 @@ public class Restaurant {
         this.cuisine = cuisine;
     }
 
-    @DynamoDBAttribute(attributeName = "Location")
+    @DynamoDBAttribute(attributeName = "location")
     public String getLocation() {
         return location;
     }
@@ -73,7 +73,7 @@ public class Restaurant {
         this.location = location;
     }
 
-    @DynamoDBAttribute(attributeName = "Menu")
+    @DynamoDBAttribute(attributeName = "menu")
     public List<String> getMenu() {
         return menu;
     }
