@@ -7,9 +7,7 @@ import com.kenzie.appserver.service.model.Restaurant;
 import org.springframework.stereotype.Service;
 
 @Service
-//rename to RestaurantService
 public class RestaurantService {
-    //rename to RestaurantRepository after its made
     private RestaurantRepository restaurantRepository;
 
     public RestaurantService(RestaurantRepository restaurantRepository) {
