@@ -1,25 +1,35 @@
-package com.kenzie.appserver.repositories.model;
+package com.kenzie.appserver.controller.model;
 
-
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@DynamoDBTable(tableName = "DynamoDB-Restaurants")
-public class RestaurantRecord {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class RestaurantResponse {
 
+    @JsonProperty("restaurantId")
     private String restaurantId;
+
+    @JsonProperty("restaurantName")
     private String restaurantName;
+
+    @JsonProperty("rating")
     private int rating;
+
+    @JsonProperty("status")
     private String status;
+
+    @JsonProperty("cuisine")
     private String cuisine;
+
+    @JsonProperty("location")
     private String location;
+
+    @JsonProperty("menu")
     private List<String> menu;
 
-    @DynamoDBHashKey(attributeName = "restaurantId")
+
     public String getRestaurantId() {
         return restaurantId;
     }
@@ -28,16 +38,6 @@ public class RestaurantRecord {
         this.restaurantId = restaurantId;
     }
 
-    @DynamoDBRangeKey(attributeName = "rating")
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    @DynamoDBAttribute(attributeName = "restaurantName")
     public String getRestaurantName() {
         return restaurantName;
     }
@@ -46,7 +46,12 @@ public class RestaurantRecord {
         this.restaurantName = restaurantName;
     }
 
-    @DynamoDBAttribute(attributeName = "status")
+    public int getRating() { return rating; }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -55,7 +60,6 @@ public class RestaurantRecord {
         this.status = status;
     }
 
-    @DynamoDBAttribute(attributeName = "cuisine")
     public String getCuisine() {
         return cuisine;
     }
@@ -64,7 +68,6 @@ public class RestaurantRecord {
         this.cuisine = cuisine;
     }
 
-    @DynamoDBAttribute(attributeName = "location")
     public String getLocation() {
         return location;
     }
@@ -73,7 +76,6 @@ public class RestaurantRecord {
         this.location = location;
     }
 
-    @DynamoDBAttribute(attributeName = "menu")
     public List<String> getMenu() {
         return menu;
     }
