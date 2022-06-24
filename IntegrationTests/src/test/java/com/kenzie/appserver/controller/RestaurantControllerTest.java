@@ -2,8 +2,8 @@ package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.IntegrationTest;
 import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.service.ExampleService;
-import com.kenzie.appserver.service.model.Example;
+import com.kenzie.appserver.service.RestaurantService;
+import com.kenzie.appserver.service.model.Restaurant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,12 +23,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @IntegrationTest
-class ExampleControllerTest {
+class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Autowired
-    ExampleService exampleService;
+    RestaurantService restaurantService;
 
     private final MockNeat mockNeat = MockNeat.threadLocal();
 
@@ -39,9 +39,9 @@ class ExampleControllerTest {
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
 
-        Example example = new Example(id, name);
-        Example persistedExample = exampleService.addNewExample(example);
-        mvc.perform(get("/example/{id}", persistedExample.getId())
+        Restaurant restaurant = new Restaurant(id, name);
+        Restaurant persistedRestaurant = restaurantService.addNewExample(restaurant);
+        mvc.perform(get("/example/{id}", persistedRestaurant.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id")
                         .value(is(id)))
