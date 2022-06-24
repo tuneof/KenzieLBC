@@ -8,7 +8,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
 
-@DynamoDBTable(tableName = "Restaurant")
+@DynamoDBTable(tableName = "DynamoDB-Restaurants")
 public class RestaurantRecord {
 
     private String restaurantId;
