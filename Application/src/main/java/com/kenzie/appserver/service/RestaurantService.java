@@ -18,7 +18,6 @@ public class RestaurantService {
     }
 
     public Restaurant findById(String id) {
-        //Once RestaurantModel/Record gets implemented
         Restaurant restaurantFromBackend = restaurantRepository
                 .findById(id)
                 .map(restaurant -> new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(),
@@ -45,12 +44,4 @@ public class RestaurantService {
 
         return restaurants;
     }
-
-//    public Restaurant addNewExample(Restaurant restaurant) {
-//        ExampleRecord exampleRecord = new ExampleRecord();
-//        exampleRecord.setId(restaurant.getId());
-//        exampleRecord.setName(restaurant.getName());
-//        restaurantRepository.save(exampleRecord);
-//        return restaurant;
-//    }
 }
