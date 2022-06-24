@@ -197,7 +197,7 @@ Resources:
         Fn::GetAtt: [ LambdaRole , "Arn" ]
       Runtime: nodejs12.x
       Timeout: 60
-  InitializeLeagueMatchesTable:
+  InitializeRestaurantTable:
     Type: Custom::InitFunction
     DependsOn: RestaurantTable
     Properties:
