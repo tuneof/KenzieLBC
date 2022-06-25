@@ -21,8 +21,8 @@ public class QueryUtility {
     }
 
     public class RestaurantControllerClient {
-        public ResultActions getById(String id) throws Exception {
-            return mvc.perform(get("/all", id)
+        public ResultActions getRestaurants() throws Exception {
+            return mvc.perform(get("/all")
                     .accept(MediaType.APPLICATION_JSON));
         }
 
