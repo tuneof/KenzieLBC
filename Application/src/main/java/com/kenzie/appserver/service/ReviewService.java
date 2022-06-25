@@ -19,12 +19,10 @@ public class ReviewService {
     public Review findById(String id) {
         Review reviewFromBackend = reviewRepository
                 .findById(id)
-                .map(restaurant -> new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(),
-                        restaurant.getRating(), restaurant.getStatus(), restaurant.getCuisine(), restaurant.getLocation(),
-                        restaurant.getMenu()))
+                .map(review -> new Review(review.getRestaurantId(), review.getUserId, review.getReview))
                 .orElse(null);
 
-        return restaurantFromBackend;
+        return reviewFromBackend;
     }
 
     public List<Restaurant> findAll() {
