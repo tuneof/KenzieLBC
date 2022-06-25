@@ -61,6 +61,7 @@ Resources:
                         restaurantId: "1",
                         userId: "puppyshy",
                         review: "This restaurant is delicious!!"
+                        rating: "5"
                       }
                     }
                   },
@@ -70,6 +71,7 @@ Resources:
                         restaurantId: "2",
                         userId: "puppyshy",
                         review: "The service was too slow."
+                        rating: "1"
                       }
                     }
                   }
