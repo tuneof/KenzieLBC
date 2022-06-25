@@ -54,7 +54,7 @@ Resources:
             console.log(JSON.stringify(event,null,2));
             var params = {
               RequestItems: {
-                "DynamoDB-Restaurants": [
+                "DynamoDB-Reviews": [
                   {
                     PutRequest: {
                       Item: {
