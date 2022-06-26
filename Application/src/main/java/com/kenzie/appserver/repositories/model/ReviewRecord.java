@@ -43,13 +43,13 @@ public class ReviewRecord {
         this.rating = rating;
     }
 
-    @DynamoDBAttribute(attributeName = "comment")
-    public String getComment() {
-        return comment;
+    @DynamoDBAttribute(attributeName = "review")
+    public String getReview() {
+        return review;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setReview(String comment) {
+        this.review = review;
     }
 }
 

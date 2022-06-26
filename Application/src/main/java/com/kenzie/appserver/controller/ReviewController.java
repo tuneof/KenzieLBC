@@ -33,24 +33,24 @@ public class ReviewController {
         String restaurantId = reviewCreateRequest.getRestaurantId();
         String userId = reviewCreateRequest.getUserId();
         Integer rating = reviewCreateRequest.getRating();
-        String comment = reviewCreateRequest.getReview();
+        String review = reviewCreateRequest.getReview();
 
-        Review review = new Review(restaurantId, userId, rating, comment);
-        reviewService.addReview(review);
+        Review userReview = new Review(restaurantId, userId, rating, review);
+        reviewService.addReview(userReview);
 
-        ReviewResponse response = reviewToResponse(review);
+        ReviewResponse response = reviewToResponse();
 
         return ResponseEntity.created(URI.create("/example/" + ReviewResponse.getId())).body(response);
     }
 
     @PutMapping
     public ResponseEntity<ReviewResponse> updateReview() {
-
+        return null;
     }
 
     @DeleteMapping
     public ResponseEntity<ReviewResponse> deleteReview() {
-
+        return null;
     }
 
     private ReviewResponse reviewToResponse (Review review) {
@@ -61,30 +61,5 @@ public class ReviewController {
         reviewResponse.setReview(review.getComment());
         return reviewResponse;
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ExampleResponse> get(@PathVariable("id") String id) {
-//
-//        review review = reviewService.findById(id);
-//        if (review == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        ExampleResponse exampleResponse = new ExampleResponse();
-//        exampleResponse.setId(review.getId());
-//        exampleResponse.setName(review.getName());
-//        return ResponseEntity.ok(exampleResponse);
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<ExampleResponse> addNewConcert(@RequestBody ExampleCreateRequest exampleCreateRequest) {
-//        review review = new review(randomUUID().toString(),
-//                exampleCreateRequest.getName());
-//        reviewService.addNewExample(review);
-//
-//        ExampleResponse exampleResponse = new ExampleResponse();
-//        exampleResponse.setId(review.getId());
-//        exampleResponse.setName(review.getName());
-//
-//        return ResponseEntity.created(URI.create("/example/" + exampleResponse.getId())).body(exampleResponse);
-//    }
+
 }
