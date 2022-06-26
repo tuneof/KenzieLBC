@@ -14,7 +14,7 @@ public class ReviewRecord {
     private String restaurantId;
     private String userId;
     private Integer rating;
-    private String comment;
+    private String review;
 
     @DynamoDBHashKey(attributeName = "restaurantId")
     public String getRestaurantId() {

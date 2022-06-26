@@ -3,6 +3,7 @@ package com.kenzie.appserver.service;
 import com.kenzie.appserver.repositories.RestaurantRepository;
 import com.kenzie.appserver.repositories.ReviewRepository;
 import com.kenzie.appserver.service.model.Restaurant;
+import com.kenzie.appserver.service.model.Review;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,16 +17,20 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review findById(String id) {
+    public Review findById(String restaurantId) {
         Review reviewFromBackend = reviewRepository
-                .findById(id)
-                .map(review -> new Review(review.getRestaurantId(), review.getUserId, review.getReview))
+                .findById(restaurantId)
+                .map(review -> new Review(
+                        review.getRestaurantId(),
+                        review.getUserId(),
+                        review.getRating(),
+                        review.getReview()))
                 .orElse(null);
 
         return reviewFromBackend;
     }
 
-    public List<Restaurant> findAll() {
+    public List<Review> findAll() {
         List<Restaurant> restaurants = new ArrayList<>();
         restaurantRepository
                 .findAll()
