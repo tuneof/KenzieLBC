@@ -1,20 +1,20 @@
 package com.kenzie.appserver.service.model;
 
 public class Review {
-    private final String comment;
+    private final String review;
     private final String restaurantId;
     private final String userId;
     private final Integer rating;
 
-    public Review(String restaurantId, String userId, Integer rating, String comment) {
-        this.comment = comment;
+    public Review(String restaurantId, String userId, Integer rating, String review) {
+        this.review = review;
         this.restaurantId = restaurantId;
         this.userId = userId;
         this.rating = rating;
     }
 
     public String getComment() {
-        return comment;
+        return review;
     }
 
     public String getRestaurantId() {

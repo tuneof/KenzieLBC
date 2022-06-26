@@ -13,8 +13,8 @@ public class ReviewCreateRequest {
     private String userId;
     @JsonProperty("rating")
     private Integer rating;
-    @JsonProperty("comment")
-    private String comment;
+    @JsonProperty("review")
+    private String review;
 
     public String getRestaurantId() {
         return restaurantId;
@@ -40,11 +40,11 @@ public class ReviewCreateRequest {
         this.rating = rating;
     }
 
-    public String getComment() {
-        return comment;
+    public String getReview() {
+        return review;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.review = review;
     }
 }
