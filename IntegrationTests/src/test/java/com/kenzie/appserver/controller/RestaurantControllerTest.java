@@ -47,46 +47,9 @@ class RestaurantControllerTest {
     }
 
     @Test
-    public void getById_Exists() throws Exception {
-        String id = UUID.randomUUID().toString();
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new RestaurantCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(jsonPath("id")
-                        .value(is(id)))
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
+    public void get_restaurants() throws Exception {
+        queryUtility.restaurantControllerClient.getRestaurants()
                 .andExpect(status().isOk());
-    }
-
-    @Test
-    public void getById_invalidIdIsEmpty() throws Exception {
-        String id = "";
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new RestaurantCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void getById_invalidIdIsNull() throws Exception {
-        String id = null;
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new RestaurantCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(status().isBadRequest());
     }
 
 //    @Test
