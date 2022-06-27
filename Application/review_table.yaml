@@ -30,12 +30,12 @@ Resources:
     Properties:
       TableName: "DynamoDB-Reviews"
       AttributeDefinitions:
-        - AttributeName: "restaurantId"
+        - AttributeName: "restaurantid"
           AttributeType: "S"
-        - AttributeName: "userId"
+        - AttributeName: "userid"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "restaurantId"
+        - AttributeName: "restaurantid"
           KeyType: "HASH"
         - AttributeName: "userId"
           KeyType: "RANGE"
