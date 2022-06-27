@@ -31,9 +31,10 @@ public class ReviewController {
         Review userReview = new Review(restaurantId, userId, rating, review);
         reviewService.addReview(userReview);
 
-        ReviewResponse response = reviewToResponse();
+//        ReviewResponse response = reviewToResponse();
 
-        return ResponseEntity.created(URI.create("/example/" + ReviewResponse.getId())).body(response);
+//        return ResponseEntity.created(URI.create("/example/" + ReviewResponse.getId())).body(response);
+        return null;
     }
 
     @PutMapping
