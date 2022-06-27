@@ -13,7 +13,7 @@ public class Review {
         this.rating = rating;
     }
 
-    public String getComment() {
+    public String getReview() {
         return review;
     }
 
