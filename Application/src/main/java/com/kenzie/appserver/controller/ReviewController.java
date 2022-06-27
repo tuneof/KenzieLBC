@@ -22,19 +22,18 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<List<ReviewResponse>> addNewReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {
+    public ResponseEntity<ReviewResponse> addNewReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {
         String restaurantId = reviewCreateRequest.getRestaurantId();
         String userId = reviewCreateRequest.getUserId();
-        Integer rating = reviewCreateRequest.getRating();
+        String rating = reviewCreateRequest.getRating();
         String review = reviewCreateRequest.getReview();
 
         Review userReview = new Review(restaurantId, userId, rating, review);
         reviewService.addReview(userReview);
 
-//        ReviewResponse response = reviewToResponse();
+        ReviewResponse response = reviewToResponse(userReview);
 
-//        return ResponseEntity.created(URI.create("/example/" + ReviewResponse.getId())).body(response);
-        return null;
+        return ResponseEntity.created(URI.create("/review/" + response.getRestaurantId())).body(response);
     }
 
     @PutMapping
