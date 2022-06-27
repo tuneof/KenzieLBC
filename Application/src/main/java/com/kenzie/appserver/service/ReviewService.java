@@ -48,9 +48,10 @@ public class ReviewService {
         return reviews;
     }
 
-    public void addReview(Review review) {
+    public Review addReview(Review review) {
         ReviewRecord reviewRecord = toReviewRecord(review);
         reviewRepository.save(reviewRecord);
+        return review;
     }
 
     private ReviewRecord toReviewRecord(Review review) {

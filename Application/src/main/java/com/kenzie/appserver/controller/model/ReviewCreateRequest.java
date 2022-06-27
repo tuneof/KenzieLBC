@@ -44,7 +44,7 @@ public class ReviewCreateRequest {
         return review;
     }
 
-    public void setComment(String comment) {
+    public void setReview(String review) {
         this.review = review;
     }
 }

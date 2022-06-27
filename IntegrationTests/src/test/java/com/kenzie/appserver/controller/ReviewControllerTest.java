@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kenzie.appserver.IntegrationTest;
+import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
