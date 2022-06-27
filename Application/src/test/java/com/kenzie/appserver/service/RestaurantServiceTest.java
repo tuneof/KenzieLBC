@@ -61,6 +61,10 @@ public class RestaurantServiceTest {
         Assertions.assertEquals(record.getRestaurantName(), restaurant.getRestaurantName(), "Expected the record-restaurant and restaurant names to match");
     }
 
+    /** ------------------------------------------------------------------------
+     *  restaurantService.findAll
+     *  ------------------------------------------------------------------------ **/
+
     @Test
     void find_all() {
         // GIVEN
