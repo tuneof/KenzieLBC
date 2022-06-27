@@ -10,7 +10,7 @@ public class ReviewResponse {
     @JsonProperty("userId")
     private String userId;
     @JsonProperty("rating")
-    private Integer rating;
+    private String rating;
     @JsonProperty("comment")
     private String comment;
 
@@ -30,11 +30,11 @@ public class ReviewResponse {
         this.userId = userId;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

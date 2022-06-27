@@ -15,7 +15,7 @@ public class RestaurantResponse {
     private String restaurantName;
 
     @JsonProperty("rating")
-    private int rating;
+    private String rating;
 
     @JsonProperty("status")
     private String status;
@@ -46,9 +46,9 @@ public class RestaurantResponse {
         this.restaurantName = restaurantName;
     }
 
-    public int getRating() { return rating; }
+    public String getRating() { return rating; }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

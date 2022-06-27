@@ -4,9 +4,9 @@ public class Review {
     private final String review;
     private final String restaurantId;
     private final String userId;
-    private final Integer rating;
+    private final String rating;
 
-    public Review(String restaurantId, String userId, Integer rating, String review) {
+    public Review(String restaurantId, String userId, String rating, String review) {
         this.review = review;
         this.restaurantId = restaurantId;
         this.userId = userId;
@@ -25,7 +25,7 @@ public class Review {
         return userId;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 }

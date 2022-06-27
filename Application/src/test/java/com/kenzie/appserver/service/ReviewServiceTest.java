@@ -27,7 +27,7 @@ public class ReviewServiceTest {
         String restaurantId = "4";
         String userId = "5";
         String review = "very cool place, nice food";
-        int rating = 3;
+        String rating = "3";
 
         Review userReview = new Review(restaurantId, userId, rating, review);
         ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
