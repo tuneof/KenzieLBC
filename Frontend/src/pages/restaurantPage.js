@@ -19,7 +19,7 @@ class RestaurantPage extends BaseClass {
     async mount() {
         document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
         document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
-        this.client = new ExampleClient();
+        this.client = new RestaurantClient();
 
         this.dataStore.addChangeListener(this.renderExample)
     }
@@ -46,7 +46,7 @@ class RestaurantPage extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
     async onGetRestaurants {
-        let result = await this.client.getExample(id, this.errorHandler);
+        let result = await this.client.getAllRestaurants(this.errorHandler);
         this.dataStore.set("restaurants", result);
     }
 
