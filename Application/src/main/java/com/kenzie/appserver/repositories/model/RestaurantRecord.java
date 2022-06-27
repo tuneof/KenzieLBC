@@ -13,7 +13,7 @@ public class RestaurantRecord {
 
     private String restaurantId;
     private String restaurantName;
-    private int rating;
+    private String rating;
     private String status;
     private String cuisine;
     private String location;
@@ -29,11 +29,11 @@ public class RestaurantRecord {
     }
 
     @DynamoDBRangeKey(attributeName = "rating")
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

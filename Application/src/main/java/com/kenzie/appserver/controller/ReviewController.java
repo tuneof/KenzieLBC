@@ -25,7 +25,7 @@ public class ReviewController {
     public ResponseEntity<ReviewResponse> addNewReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {
         String restaurantId = reviewCreateRequest.getRestaurantId();
         String userId = reviewCreateRequest.getUserId();
-        Integer rating = reviewCreateRequest.getRating();
+        String rating = reviewCreateRequest.getRating();
         String review = reviewCreateRequest.getReview();
 
         Review userReview = new Review(restaurantId, userId, rating, review);

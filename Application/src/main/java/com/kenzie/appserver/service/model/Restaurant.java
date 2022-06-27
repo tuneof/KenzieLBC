@@ -5,14 +5,14 @@ import java.util.List;
 public class Restaurant {
     private final String restaurantId;
     private final String restaurantName;
-    private final int rating;
+    private final String rating;
     private final String status;
     private final String cuisine;
     private final String location;
     private final List<String> menu;
 
 
-    public Restaurant(String restaurantId, String restaurantName, int rating, String status, String cuisine, String location, List<String> menu) {
+    public Restaurant(String restaurantId, String restaurantName, String rating, String status, String cuisine, String location, List<String> menu) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.rating = rating;
@@ -30,7 +30,7 @@ public class Restaurant {
         return restaurantName;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
