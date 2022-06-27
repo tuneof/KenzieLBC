@@ -1,5 +1,6 @@
 package com.kenzie.appserver.controller;
 
+
 import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import com.kenzie.appserver.controller.model.ReviewResponse;
 import com.kenzie.appserver.service.ReviewService;
@@ -51,6 +52,7 @@ public class ReviewController {
         reviewResponse.setUserId(review.getUserId());
         reviewResponse.setRating(review.getRating());
         reviewResponse.setReview(review.getReview());
+
         return reviewResponse;
     }
 
