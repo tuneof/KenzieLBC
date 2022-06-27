@@ -9,11 +9,11 @@ import axios from 'axios'
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
  */
-export default class ExampleClient extends BaseClass {
+export default class RestaurantClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getExample', 'createExample'];
+        const methodsToBind = ['clientLoaded', 'getAllRestaurants'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -30,31 +30,40 @@ export default class ExampleClient extends BaseClass {
         }
     }
 
+    async getAllRestaurants(errorCallback) {
+        try {
+            const response = await this.client.get(`/restaurant/all`);
+            return response.data;
+        } catch (error) {
+            this.handleError("getAllRestaurants", error, errorCallback);
+        }
+    }
+
     /**
      * Gets the concert for the given ID.
      * @param id Unique identifier for a concert
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The concert
      */
-    async getExample(id, errorCallback) {
-        try {
-            const response = await this.client.get(`/example/${id}`);
-            return response.data;
-        } catch (error) {
-            this.handleError("getConcert", error, errorCallback)
-        }
-    }
+//    async getExample(id, errorCallback) {
+//        try {
+//            const response = await this.client.get(`/example/${id}`);
+//            return response.data;
+//        } catch (error) {
+//            this.handleError("getConcert", error, errorCallback)
+//        }
+//    }
 
-    async createExample(name, errorCallback) {
-        try {
-            const response = await this.client.post(`example`, {
-                name: name
-            });
-            return response.data;
-        } catch (error) {
-            this.handleError("createExample", error, errorCallback);
-        }
-    }
+//    async createExample(name, errorCallback) {
+//        try {
+//            const response = await this.client.post(`example`, {
+//                name: name
+//            });
+//            return response.data;
+//        } catch (error) {
+//            this.handleError("createExample", error, errorCallback);
+//        }
+//    }
 
     /**
      * Helper method to log the error and run any error functions.
