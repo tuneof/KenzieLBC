@@ -35,12 +35,7 @@ public class ReviewService {
     public Review findByRestaurantId(String restaurantId) {
         return reviewRepository
                 .findById(restaurantId)
-                .map(review -> new Review(
-                        review.getRestaurantId(),
-                        review.getUserId(),
-                        review.getRating(),
-                        review.getReview()
-                ))
+                .map(review -> toReview(review))
                 .orElse(null);
     }
 
@@ -49,20 +44,36 @@ public class ReviewService {
         reviewRepository
                 .findAll()
                 .forEach(review -> reviews
-                        .add(new Review(
-                                review.getRestaurantId(),
-                                review.getUserId(),
-                                review.getRating(),
-                                review.getReview())));
+                        .add(toReview(review)));
         return reviews;
     }
 
-    public void addReview(ReviewRecord reviewRecord) {
+    public void addReview(Review review) {
+        ReviewRecord reviewRecord = toReviewRecord(review);
         reviewRepository.save(reviewRecord);
     }
 
-    public void deleteReview(ReviewRecord reviewRecord) {
-            reviewRepository.delete(reviewRecord);
+    private ReviewRecord toReviewRecord(Review review) {
+        ReviewRecord reviewRecord = new ReviewRecord();
+        reviewRecord.setRestaurantId(review.getRestaurantId());
+        reviewRecord.setUserId(review.getUserId());
+        reviewRecord.setRating(review.getRating());
+        reviewRecord.setReview(review.getReview());
+        return reviewRecord;
+    }
+
+    private Review toReview(ReviewRecord reviewRecord) {
+        Review review = new Review(
+                reviewRecord.getRestaurantId(),
+                reviewRecord.getUserId(),
+                reviewRecord.getRating(),
+                reviewRecord.getReview());
+        return review;
+    }
+
+    public void deleteReview(Review review) {
+        ReviewRecord reviewRecord = toReviewRecord(review);
+        reviewRepository.delete(reviewRecord);
     }
 
     public ReviewRecord updateReview(ReviewRecord reviewRecord) {
@@ -78,4 +89,5 @@ public class ReviewService {
                     return reviewRepository.save(reviewRecord);
                 });
     }
+
 }
