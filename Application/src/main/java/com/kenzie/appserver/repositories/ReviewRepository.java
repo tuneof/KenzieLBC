@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 @EnableScan
 public interface ReviewRepository extends CrudRepository<ReviewRecord, String> {
+
 }

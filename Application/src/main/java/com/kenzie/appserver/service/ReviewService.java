@@ -2,6 +2,7 @@ package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.RestaurantRepository;
 import com.kenzie.appserver.repositories.ReviewRepository;
+import com.kenzie.appserver.repositories.model.ReviewRecord;
 import com.kenzie.appserver.service.model.Restaurant;
 import com.kenzie.appserver.service.model.Review;
 import org.springframework.stereotype.Service;
@@ -11,47 +12,58 @@ import java.util.List;
 
 @Service
 public class ReviewService {
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review findById(String restaurantId) {
-        Review reviewFromBackend = reviewRepository
+    public List<Review> findByRestaurantId(String restaurantId) {
+        List<Review> listOfReviews = new ArrayList<>();
+        reviewRepository
                 .findById(restaurantId)
-                .map(review -> new Review(
+                .forEach(review -> new Review(
                         review.getRestaurantId(),
                         review.getUserId(),
                         review.getRating(),
                         review.getReview()))
                 .orElse(null);
 
-        return reviewFromBackend;
+        return listOfReviews;
     }
 
     public List<Review> findAll() {
-        List<Restaurant> restaurants = new ArrayList<>();
-        restaurantRepository
+        List<Review> reviews = new ArrayList<>();
+        reviewRepository
                 .findAll()
-                .forEach(restaurant -> restaurants
-                        .add(new Restaurant(
-                                restaurant.getRestaurantId(),
-                                restaurant.getRestaurantName(),
-                                restaurant.getRating(),
-                                restaurant.getStatus(),
-                                restaurant.getCuisine(),
-                                restaurant.getLocation(),
-                                restaurant.getMenu())));
-
-        return restaurants;
+                .forEach(review -> reviews
+                        .add(new Review(
+                                review.getRestaurantId(),
+                                review.getUserId(),
+                                review.getRating(),
+                                review.getReview())));
+        return reviews;
     }
 
-//    public Restaurant addNewExample(Restaurant restaurant) {
-//        ExampleRecord exampleRecord = new ExampleRecord();
-//        exampleRecord.setId(restaurant.getId());
-//        exampleRecord.setName(restaurant.getName());
-//        restaurantRepository.save(exampleRecord);
-//        return restaurant;
-//    }
+    public void addReview(ReviewRecord reviewRecord) {
+        reviewRepository.save(reviewRecord);
+    }
+
+    public void deleteReview(ReviewRecord reviewRecord) {
+            reviewRepository.delete(reviewRecord);
+    }
+
+    public ReviewRecord updateReview(ReviewRecord reviewRecord) {
+        return reviewRepository.findById(reviewRecord.getRestaurantId())
+                .map(review -> {
+                    review.setRestaurantId(reviewRecord.getRestaurantId());
+                    review.setUserId(reviewRecord.getUserId());
+                    review.setRating(reviewRecord.getRating());
+                    review.setReview(reviewRecord.getReview());
+                    return reviewRepository.save(reviewRecord);
+                })
+                .orElseGet(() -> {
+                    return reviewRepository.save(reviewRecord);
+                });
+    }
 }
