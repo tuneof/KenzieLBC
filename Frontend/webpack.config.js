@@ -1,13 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 module.exports = {
   optimization: {
     usedExports: true
   },
   entry: {
-    examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
+    restaurantPage: path.resolve(__dirname, 'src', 'pages', 'restaurantPage.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -37,6 +39,7 @@ module.exports = {
           to: path.resolve("dist/css")
         }
       ]
-    })
+    }),
+    new CleanWebpackPlugin()   
   ]
 }

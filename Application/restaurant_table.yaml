@@ -59,8 +59,8 @@ Resources:
                         restaurantName: "McBonalds",
                         status: "OPEN",
                         cuisine: "Indian",
-                        location: "New York City, NY",
-                        menu: ["test", "test2"]
+                        location: "New York , NY",
+                        menu: ["Tandoori Chicken", "Lamb Curry", "Chicken Tikka Masala"]
                       }
                     }
                   },
@@ -73,7 +73,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Korean",
                         location: "Brooklyn, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Pork Belly", "Prime Short Rib", "Beef Short Ribs"]
                       }
                     }
                   },
@@ -86,7 +86,7 @@ Resources:
                         status: "CLOSED",
                         cuisine: "American",
                         location: "Queens, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Egg Benedict", "Countryside Omelette", "Belgian Waffle"]
                       }
                     }
                   },
@@ -95,11 +95,11 @@ Resources:
                       Item: {
                         restaurantId: "4",
                         rating: "3",
-                        restaurantName: "Uptown Taco",
+                        restaurantName: "Downtown Taco",
                         status: "OPEN",
                         cuisine: "Mexican",
                         location: "The Bronx, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Buffalo Chicken Taco", "Steak Quesadilla", "BBQ Chicken Taco"]
                       }
                     }
                   },
@@ -112,7 +112,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Chinese",
                         location: "Staten Island, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Peking Roasted Duck", "Kung Pao Chicken", "Ma Po Tofu"]
                       }
                     }
                   },
@@ -125,7 +125,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Thai",
                         location: "New York, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Spicy Green Papaya Salad", "Pad Thai", "Tom Yum Goong"]
                       }
                     }
                   },
@@ -138,7 +138,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Italian",
                         location: "New York, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Penne alla Vodka", "Linguini Mare Bello", "Chicken Francese"]
                       }
                     }
                   },
@@ -151,7 +151,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Japanese",
                         location: "New York, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Spicy Tuna Roll", "Miso Ramen", "Kara Age-Don"]
                       }
                     }
                   },
@@ -164,7 +164,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Vietnamese",
                         location: "New York, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Brisket Pho", "BBQ Beef Banh Mi", "Summer Roll"]
                       }
                     }
                   },
@@ -177,7 +177,7 @@ Resources:
                         status: "OPEN",
                         cuisine: "Greek",
                         location: "New York, NY",
-                        menu: ["test", "test2"]
+                        menu: ["Grilled Octopus", "Chicken Souvlaki", "Seafood Pasta"]
                       }
                     }
                   }
@@ -197,7 +197,7 @@ Resources:
         Fn::GetAtt: [ LambdaRole , "Arn" ]
       Runtime: nodejs12.x
       Timeout: 60
-  InitializeLeagueMatchesTable:
+  InitializeRestaurantTable:
     Type: Custom::InitFunction
     DependsOn: RestaurantTable
     Properties:
