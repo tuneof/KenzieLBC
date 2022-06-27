@@ -17,11 +17,12 @@ class RestaurantPage extends BaseClass {
      * Once the page has loaded, set up the event handlers and fetch the concert list.
      */
     async mount() {
-        document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
-        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
+//        document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
+//        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
         this.client = new RestaurantClient();
 
-        this.dataStore.addChangeListener(this.renderExample)
+        this.dataStore.addChangeListener(this.renderRestaurant)
+        this.onGetRestaurants();
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
@@ -35,17 +36,24 @@ class RestaurantPage extends BaseClass {
             let restaurantHTML = "<ul>";
             for (let restaurant of restaurants) {
                 restaurantHTML += `<li>
-                <h3>${restaurant.}
-                `
+                <h3>${restaurant.restaurantId}</h3>
+                <h4>${restaurant.restaurantName}</h4>
+                <h4>${restaurant.rating}</h4>
+                <h4>${restaurant.status}</h4>
+                <h4>${restaurant.cuisine}</h4>
+                <h4>${restaurant.location}</h4>
+                <h4>${restaurant.menu}</h4>
+                </li>`;
             }
+            resultArea.innerHTML = restaurantHTML + "</ul>";
         } else {
-            resultArea.innerHTML = "No Item";
+            resultArea.innerHTML = "No Restaurants";
         }
     }
 
     // Event Handlers --------------------------------------------------------------------------------------------------
 
-    async onGetRestaurants {
+    async onGetRestaurants() {
         let result = await this.client.getAllRestaurants(this.errorHandler);
         this.dataStore.set("restaurants", result);
     }
