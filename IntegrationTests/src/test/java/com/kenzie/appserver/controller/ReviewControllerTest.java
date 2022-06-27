@@ -4,6 +4,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kenzie.appserver.IntegrationTest;
 import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import net.andreinc.mockneat.MockNeat;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class ReviewControllerTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final MockNeat mockNeat = MockNeat.threadLocal();
+    private QueryUtility queryUtility;
+
+    @BeforeAll
+    public void setup() { queryUtility = new QueryUtility(mvc); }
 
     @Test
     public void can_create_review() throws Exception {
@@ -37,22 +42,7 @@ public class ReviewControllerTest {
         reviewCreateRequest.setUserId(userId);
         reviewCreateRequest.setReview(review);
         reviewCreateRequest.setRating(rating);
-
-        //hopefully fixes with all classes implemented otherwise idk
-        mapper.registerModule(new JavaTimeModule());
-
-        mvc.perform(post("/review")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(reviewCreateRequest)))
-                .andExpect(jsonPath("restaurantId")
-                        .value(is(restaurantId)))
-                .andExpect(jsonPath("userId")
-                        .value(is(userId)))
-                .andExpect(jsonPath("review")
-                        .value(is(review)))
-                .andExpect(jsonPath("rating")
-                        .value(is(rating)))
-                .andExpect(status().isCreated());
+        queryUtility.reviewControllerClient.addReview(reviewCreateRequest)
+                .andExpect(status().isOk());
     }
 }
