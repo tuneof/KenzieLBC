@@ -35,7 +35,7 @@ public class ReviewControllerTest {
         String restaurantId = "3";
         String userId = mockNeat.strings().valStr();
         String review = mockNeat.strings().valStr();
-        int rating = 4;
+        String rating = "4";
 
         ReviewCreateRequest reviewCreateRequest = new ReviewCreateRequest();
         reviewCreateRequest.setRestaurantId(restaurantId);
