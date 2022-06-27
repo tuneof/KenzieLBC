@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.IntegrationTest;
 import com.kenzie.appserver.controller.model.ExampleCreateRequest;
+import com.kenzie.appserver.controller.model.RestaurantCreateRequest;
 import com.kenzie.appserver.service.RestaurantService;
 import com.kenzie.appserver.service.model.Restaurant;
 
@@ -46,65 +47,9 @@ class RestaurantControllerTest {
     }
 
     @Test
-    public void getById_Exists() throws Exception {
-        String id = UUID.randomUUID().toString();
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new ExampleCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(jsonPath("id")
-                        .value(is(id)))
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
+    public void get_restaurants() throws Exception {
+        queryUtility.restaurantControllerClient.getRestaurants()
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void getById_invalidIdIsEmpty() throws Exception {
-        String id = "";
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new ExampleCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void getById_invalidIdIsNull() throws Exception {
-        String id = null;
-        String name = mockNeat.strings().get();
-
-        RestaurantCreateRequest restaurantCreateRequest = new ExampleCreateRequest();
-        restaurantCreateRequest.setRestaurantId(id);
-        restaurantCreateRequest.setRestaurantName(name);
-
-        queryUtility.restaurantControllerClient.getById(restaurantCreateRequest.getName())
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void createExample_CreateSuccessful() throws Exception {
-        String name = mockNeat.strings().valStr();
-
-        ExampleCreateRequest exampleCreateRequest = new ExampleCreateRequest();
-        exampleCreateRequest.setName(name);
-
-        mapper.registerModule(new JavaTimeModule());
-
-        mvc.perform(post("/example")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(exampleCreateRequest)))
-                .andExpect(jsonPath("id")
-                        .exists())
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
-                .andExpect(status().isCreated());
-    }
 }
