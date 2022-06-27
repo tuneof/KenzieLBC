@@ -60,8 +60,8 @@ Resources:
                       Item: {
                         restaurantId: "1",
                         userId: "puppyshy",
-                        review: "This restaurant is delicious!!"
-                        rating: {"N": "5" }
+                        review: "This restaurant is delicious!!",
+                        rating: "5"
                       }
                     }
                   },
@@ -70,8 +70,8 @@ Resources:
                       Item: {
                         restaurantId: "2",
                         userId: "puppyshy",
-                        review: "The service was too slow."
-                        rating: {"N": "1" }
+                        review: "The service was too slow.",
+                        rating: "1"
                       }
                     }
                   }
