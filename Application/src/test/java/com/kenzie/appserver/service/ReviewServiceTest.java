@@ -3,11 +3,14 @@ package com.kenzie.appserver.service;
 import com.kenzie.appserver.repositories.ReviewRepository;
 import com.kenzie.appserver.repositories.model.ReviewRecord;
 import com.kenzie.appserver.service.model.Review;
+import com.sun.media.sound.InvalidDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class ReviewServiceTest {
@@ -53,5 +56,31 @@ public class ReviewServiceTest {
         Assertions.assertEquals(returnedReview.getUserId(), userReview.getUserId(), "The user id matches");
         Assertions.assertEquals(returnedReview.getReview(), userReview.getReview(), "The review matches");
         Assertions.assertEquals(returnedReview.getRating(), userReview.getRating(), "The rating matches");
+    }
+
+    @Test
+    void deleteReview_validReview_reviewDeleted() {
+        //GIVEN
+        String restaurantId = "1";
+        String userId = "123";
+        String rating = "3";
+        String review = "This restaurant is very decorative.";
+
+        Review userReview = new Review(restaurantId, userId, rating, review);
+        ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
+
+        //WHEN
+        reviewService.deleteReview(userReview);
+
+        //THEN
+        verify(reviewRepository).delete(reviewRecordCaptor.capture());
+    }
+
+    @Test
+    void deleteReview_nullReview_reviewDeleted() {
+        //GIVEN
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.deleteReview(null));
     }
 }

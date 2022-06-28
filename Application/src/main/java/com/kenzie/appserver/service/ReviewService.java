@@ -73,8 +73,11 @@ public class ReviewService {
     }
 
     public void deleteReview(Review review) {
-        ReviewRecord reviewRecord = toReviewRecord(review);
-        reviewRepository.delete(reviewRecord);
+        if (review != null) {
+            ReviewRecord reviewRecord = toReviewRecord(review);
+            reviewRepository.delete(reviewRecord);
+        }
+        throw new ReviewRecordNotFoundException();
     }
 
     public ReviewRecord updateReview(ReviewRecord reviewRecord) {
