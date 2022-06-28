@@ -4,6 +4,7 @@ import com.kenzie.appserver.repositories.model.ExampleRecord;
 import com.kenzie.appserver.repositories.RestaurantRepository;
 import com.kenzie.appserver.service.model.Restaurant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 public class RestaurantService {
     private RestaurantRepository restaurantRepository;
 
+    @Autowired
     public RestaurantService(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }

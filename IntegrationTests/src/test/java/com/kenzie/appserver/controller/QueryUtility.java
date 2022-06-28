@@ -23,7 +23,7 @@ public class QueryUtility {
 
     public class RestaurantControllerClient {
         public ResultActions getRestaurants() throws Exception {
-            return mvc.perform(get("/all")
+            return mvc.perform(get("/restaurant/all")
                     .accept(MediaType.APPLICATION_JSON));
         }
 

@@ -1,7 +1,5 @@
 package com.kenzie.appserver.controller;
 
-import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.controller.model.ExampleResponse;
 import com.kenzie.appserver.controller.model.RestaurantResponse;
 import com.kenzie.appserver.service.RestaurantService;
 
