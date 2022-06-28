@@ -5,6 +5,7 @@ import com.kenzie.appserver.repositories.ReviewRepository;
 import com.kenzie.appserver.repositories.model.ReviewRecord;
 import com.kenzie.appserver.service.model.Restaurant;
 import com.kenzie.appserver.service.model.Review;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
 
+    @Autowired
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
@@ -73,11 +75,12 @@ public class ReviewService {
     }
 
     public void deleteReview(Review review) {
-        if (review != null) {
+        if (review == null) {
+            throw new ReviewRecordNotFoundException();
+        } else {
             ReviewRecord reviewRecord = toReviewRecord(review);
             reviewRepository.delete(reviewRecord);
         }
-        throw new ReviewRecordNotFoundException();
     }
 
     public ReviewRecord updateReview(ReviewRecord reviewRecord) {

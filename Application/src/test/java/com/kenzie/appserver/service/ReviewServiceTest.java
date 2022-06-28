@@ -3,12 +3,10 @@ package com.kenzie.appserver.service;
 import com.kenzie.appserver.repositories.ReviewRepository;
 import com.kenzie.appserver.repositories.model.ReviewRecord;
 import com.kenzie.appserver.service.model.Review;
-import com.sun.media.sound.InvalidDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -77,7 +75,7 @@ public class ReviewServiceTest {
     }
 
     @Test
-    void deleteReview_nullReview_reviewDeleted() {
+    void deleteReview_nullReview_throwsException() {
         //GIVEN
 
         //WHEN //THEN
