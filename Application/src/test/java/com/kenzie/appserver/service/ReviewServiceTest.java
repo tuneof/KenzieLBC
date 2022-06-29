@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -80,5 +82,45 @@ public class ReviewServiceTest {
 
         //WHEN //THEN
         assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.deleteReview(null));
+    }
+
+    @Test
+    void updateReview_validInfo_reviewUpdated() {
+        // GIVEN
+        String restaurantId1 = "1";
+        String userId1 = "123";
+        String rating1 = "5";
+        String review1 = "the food is delicious";
+
+        Review userReview = new Review(restaurantId1, userId1, rating1, review1);
+        ReviewRecord record1 = new ReviewRecord();
+        record1.setRestaurantId(restaurantId1);
+        record1.setUserId(userId1);
+        record1.setRating(rating1);
+        record1.setReview(review1);
+
+        ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
+        when(reviewRepository.save(any())).thenReturn(record1);
+
+        // WHEN
+        Review returnedReview = reviewService.updateReview(userReview);
+
+        // THEN
+        verify(reviewRepository).save(reviewRecordCaptor.capture());
+        ReviewRecord reviewRecord = reviewRecordCaptor.getValue();
+
+        Assertions.assertNotNull(reviewRecord, "The review is updated");
+        Assertions.assertEquals(reviewRecord.getRestaurantId(), returnedReview.getRestaurantId(), "The restaurant id matches");
+        Assertions.assertEquals(reviewRecord.getUserId(), returnedReview.getUserId(), "The user id matches");
+        Assertions.assertEquals(reviewRecord.getReview(), returnedReview.getReview(), "The review matches");
+        Assertions.assertEquals(reviewRecord.getRating(), returnedReview.getRating(), "The rating matches");
+    }
+
+    @Test
+    void updateReview_nullReview_throwsException() {
+        //GIVEN
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.updateReview(null));
     }
 }

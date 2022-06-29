@@ -83,18 +83,13 @@ public class ReviewService {
         }
     }
 
-    public ReviewRecord updateReview(ReviewRecord reviewRecord) {
-        return reviewRepository.findById(reviewRecord.getRestaurantId())
-                .map(review -> {
-                    review.setRestaurantId(reviewRecord.getRestaurantId());
-                    review.setUserId(reviewRecord.getUserId());
-                    review.setRating(reviewRecord.getRating());
-                    review.setReview(reviewRecord.getReview());
-                    return reviewRepository.save(reviewRecord);
-                })
-                .orElseGet(() -> {
-                    return reviewRepository.save(reviewRecord);
-                });
+    public Review updateReview(Review review) {
+        if (review == null) {
+            throw new ReviewRecordNotFoundException();
+        }
+            ReviewRecord reviewRecord = toReviewRecord(review);
+            reviewRepository.save(reviewRecord);
+            return review;
     }
 
 }
