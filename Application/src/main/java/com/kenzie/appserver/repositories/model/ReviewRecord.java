@@ -22,7 +22,7 @@ public class ReviewRecord {
         this.restaurantId = restaurantId;
     }
 
-    @DynamoDBRangeKey(attributeName = "userId")
+    @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return userId;
     }

@@ -20,25 +20,17 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-//    public List<Review> findByRestaurantId(String restaurantId) {
-//        List<Review> listOfReviews = new ArrayList<>();
-//        reviewRepository
-//                .findById(restaurantId)
-//                .forEach(review -> new Review(
-//                        review.getRestaurantId(),
-//                        review.getUserId(),
-//                        review.getRating(),
-//                        review.getReview()))
-//                .orElse(null);
-//
-//        return listOfReviews;
-//    }
+    public List<Review> findByRestaurantId(String restaurantId) {
+        List<Review> listOfReviews = new ArrayList<>();
+        reviewRepository
+                .findByRestaurantId(restaurantId)
+                .forEach(review -> new Review(
+                        review.getRestaurantId(),
+                        review.getUserId(),
+                        review.getRating(),
+                        review.getReview()));
 
-    public Review findByRestaurantId(String restaurantId) {
-        return reviewRepository
-                .findById(restaurantId)
-                .map(review -> toReview(review))
-                .orElse(null);
+        return listOfReviews;
     }
 
     public List<Review> findAll() {
