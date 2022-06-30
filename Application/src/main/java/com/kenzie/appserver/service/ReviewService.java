@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ReviewService {
@@ -21,14 +22,14 @@ public class ReviewService {
     }
 
     public List<Review> findByRestaurantId(String restaurantId) {
+        if ((Objects.equals(restaurantId, "")) || restaurantId == null) {
+            throw new ReviewRecordNotFoundException();
+        }
+
         List<Review> listOfReviews = new ArrayList<>();
         reviewRepository
                 .findByRestaurantId(restaurantId)
-                .forEach(review -> new Review(
-                        review.getRestaurantId(),
-                        review.getUserId(),
-                        review.getRating(),
-                        review.getReview()));
+                .forEach(review -> listOfReviews.add(toReview(review)));
 
         return listOfReviews;
     }

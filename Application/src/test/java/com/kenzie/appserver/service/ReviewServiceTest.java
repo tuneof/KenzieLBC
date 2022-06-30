@@ -8,9 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ReviewServiceTest {
@@ -122,5 +125,118 @@ public class ReviewServiceTest {
 
         //WHEN //THEN
         assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.updateReview(null));
+    }
+
+    @Test
+    void findByRestaurantId_validRestaurantId_reviewsReturned() {
+        //GIVEN
+        String restaurantId = "1";
+        Review userReview1 = new Review(restaurantId, "123", "4", "Nice Place");
+        Review userReview2 = new Review(restaurantId, "456", "5", "Romantic Place");
+
+        ReviewRecord record1 = new ReviewRecord();
+        record1.setRestaurantId(userReview1.getRestaurantId());
+        record1.setUserId(userReview1.getUserId());
+        record1.setRating(userReview1.getRating());
+        record1.setReview(userReview1.getReview());
+
+        ReviewRecord record2 = new ReviewRecord();
+        record2.setRestaurantId(userReview2.getRestaurantId());
+        record2.setUserId(userReview2.getUserId());
+        record2.setRating(userReview2.getRating());
+        record2.setReview(userReview2.getReview());
+
+        List<ReviewRecord> recordList = new ArrayList<>();
+        recordList.add(record1);
+        recordList.add(record2);
+
+        when(reviewRepository.findByRestaurantId(any())).thenReturn(recordList);
+
+        //WHEN
+        List<Review> reviewListReturned = reviewService.findByRestaurantId(restaurantId);
+
+        //THEN
+        assertNotNull(reviewListReturned, "List is null");
+        assertEquals(userReview1.getRestaurantId(), reviewListReturned.get(0).getRestaurantId(), "RestaurantId does not match");
+        assertEquals(userReview1.getUserId(), reviewListReturned.get(0).getUserId(), "UserId does not match");
+        assertEquals(userReview1.getRating(), reviewListReturned.get(0).getRating(), "Rating does not match");
+        assertEquals(userReview1.getReview(), reviewListReturned.get(0).getReview(), "Review does not match");
+
+        assertEquals(userReview2.getRestaurantId(), reviewListReturned.get(1).getRestaurantId(), "RestaurantId does not match");
+        assertEquals(userReview2.getUserId(), reviewListReturned.get(1).getUserId(), "UserId does not match");
+        assertEquals(userReview2.getRating(), reviewListReturned.get(1).getRating(), "Rating does not match");
+        assertEquals(userReview2.getReview(), reviewListReturned.get(1).getReview(), "Review does not match");
+    }
+
+
+    @Test
+    void findByRestaurantId_emptyRestaurantId_throwsException() {
+        //GIVEN
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.findByRestaurantId(""));
+    }
+
+    @Test
+    void findByRestaurantId_nullRestaurantId_throwsException() {
+        //GIVEN
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.findByRestaurantId(null));
+    }
+
+    @Test
+    void findAllReviews() {
+        //GIVEN
+        String restaurantId = "1";
+        Review userReview1 = new Review(restaurantId, "123", "4", "Nice Place");
+        Review userReview2 = new Review(restaurantId, "456", "5", "Romantic Place");
+        Review userReview3 = new Review("3", "456", "5", "Romantic Place");
+
+
+        ReviewRecord record1 = new ReviewRecord();
+        record1.setRestaurantId(userReview1.getRestaurantId());
+        record1.setUserId(userReview1.getUserId());
+        record1.setRating(userReview1.getRating());
+        record1.setReview(userReview1.getReview());
+
+        ReviewRecord record2 = new ReviewRecord();
+        record2.setRestaurantId(userReview2.getRestaurantId());
+        record2.setUserId(userReview2.getUserId());
+        record2.setRating(userReview2.getRating());
+        record2.setReview(userReview2.getReview());
+
+        ReviewRecord record3 = new ReviewRecord();
+        record3.setRestaurantId(userReview3.getRestaurantId());
+        record3.setUserId(userReview3.getUserId());
+        record3.setRating(userReview3.getRating());
+        record3.setReview(userReview3.getReview());
+
+        List<ReviewRecord> recordList = new ArrayList<>();
+        recordList.add(record1);
+        recordList.add(record2);
+        recordList.add(record3);
+
+        when(reviewRepository.findAll()).thenReturn(recordList);
+
+        //WHEN
+        List<Review> reviewListReturned = reviewService.findAll();
+
+        //THEN
+        assertNotNull(reviewListReturned, "List is null");
+        assertEquals(userReview1.getRestaurantId(), reviewListReturned.get(0).getRestaurantId(), "RestaurantId does not match");
+        assertEquals(userReview1.getUserId(), reviewListReturned.get(0).getUserId(), "UserId does not match");
+        assertEquals(userReview1.getRating(), reviewListReturned.get(0).getRating(), "Rating does not match");
+        assertEquals(userReview1.getReview(), reviewListReturned.get(0).getReview(), "Review does not match");
+
+        assertEquals(userReview2.getRestaurantId(), reviewListReturned.get(1).getRestaurantId(), "RestaurantId does not match");
+        assertEquals(userReview2.getUserId(), reviewListReturned.get(1).getUserId(), "UserId does not match");
+        assertEquals(userReview2.getRating(), reviewListReturned.get(1).getRating(), "Rating does not match");
+        assertEquals(userReview2.getReview(), reviewListReturned.get(1).getReview(), "Review does not match");
+
+        assertEquals(userReview3.getRestaurantId(), reviewListReturned.get(2).getRestaurantId(), "RestaurantId does not match");
+        assertEquals(userReview3.getUserId(), reviewListReturned.get(2).getUserId(), "UserId does not match");
+        assertEquals(userReview3.getRating(), reviewListReturned.get(2).getRating(), "Rating does not match");
+        assertEquals(userReview3.getReview(), reviewListReturned.get(2).getReview(), "Review does not match");
     }
 }
