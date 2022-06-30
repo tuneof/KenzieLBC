@@ -10,8 +10,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -168,7 +166,6 @@ public class ReviewServiceTest {
         assertEquals(userReview2.getReview(), reviewListReturned.get(1).getReview(), "Review does not match");
     }
 
-
     @Test
     void findByRestaurantId_emptyRestaurantId_throwsException() {
         //GIVEN
@@ -192,7 +189,6 @@ public class ReviewServiceTest {
         Review userReview1 = new Review(restaurantId, "123", "4", "Nice Place");
         Review userReview2 = new Review(restaurantId, "456", "5", "Romantic Place");
         Review userReview3 = new Review("3", "456", "5", "Romantic Place");
-
 
         ReviewRecord record1 = new ReviewRecord();
         record1.setRestaurantId(userReview1.getRestaurantId());
