@@ -1,7 +1,5 @@
 package com.kenzie.appserver.controller;
 
-import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.controller.model.ExampleResponse;
 import com.kenzie.appserver.controller.model.RestaurantResponse;
 import com.kenzie.appserver.service.RestaurantService;
 
@@ -9,11 +7,8 @@ import com.kenzie.appserver.service.model.Restaurant;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.UUID.randomUUID;
 
 @RestController
 @RequestMapping("/restaurant")

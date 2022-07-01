@@ -1,6 +1,5 @@
 package com.kenzie.appserver.service;
 
-import com.kenzie.appserver.repositories.model.ExampleRecord;
 import com.kenzie.appserver.repositories.RestaurantRepository;
 import com.kenzie.appserver.service.model.Restaurant;
 

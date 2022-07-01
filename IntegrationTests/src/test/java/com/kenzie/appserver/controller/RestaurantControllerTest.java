@@ -1,27 +1,16 @@
 package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.IntegrationTest;
-import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.controller.model.RestaurantCreateRequest;
 import com.kenzie.appserver.service.RestaurantService;
-import com.kenzie.appserver.service.model.Restaurant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.management.Query;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import static java.util.UUID.randomUUID;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
