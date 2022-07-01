@@ -5,6 +5,7 @@ import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import com.kenzie.appserver.controller.model.ReviewResponse;
 import com.kenzie.appserver.service.ReviewService;
 import com.kenzie.appserver.service.model.Review;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,17 +24,18 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<ReviewResponse> addNewReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {
-        String restaurantId = reviewCreateRequest.getRestaurantId();
-        String userId = reviewCreateRequest.getUserId();
-        String rating = reviewCreateRequest.getRating();
-        String review = reviewCreateRequest.getReview();
+        Review userReview = new Review(reviewCreateRequest.getRestaurantId(), reviewCreateRequest.getUserId(),
+                reviewCreateRequest.getRating(), reviewCreateRequest.getReview());
 
-        Review userReview = new Review(restaurantId, userId, rating, review);
-        reviewService.addReview(userReview);
+        try {
+            reviewService.addReview(userReview);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
         ReviewResponse response = reviewToResponse(userReview);
 
-        return ResponseEntity.created(URI.create("/review/" + response.getRestaurantId())).body(response);
+        return ResponseEntity.ok().body(response);
     }
 
     @PutMapping
