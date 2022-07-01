@@ -28,7 +28,7 @@ public class RestaurantRecord {
         this.restaurantId = restaurantId;
     }
 
-    @DynamoDBRangeKey(attributeName = "rating")
+    @DynamoDBAttribute(attributeName = "rating")
     public String getRating() {
         return rating;
     }

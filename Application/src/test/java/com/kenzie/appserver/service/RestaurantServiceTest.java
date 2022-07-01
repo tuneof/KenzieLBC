@@ -1,7 +1,6 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.RestaurantRepository;
-import com.kenzie.appserver.repositories.model.ExampleRecord;
 import com.kenzie.appserver.repositories.model.RestaurantRecord;
 import com.kenzie.appserver.service.model.Restaurant;
 import org.junit.jupiter.api.Assertions;
