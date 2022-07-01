@@ -1,10 +1,7 @@
 package com.kenzie.appserver.repositories.model;
 
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class ReviewRecord {
         this.restaurantId = restaurantId;
     }
 
-    @DynamoDBAttribute(attributeName = "userid")
+    @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return userId;
     }
@@ -51,5 +48,6 @@ public class ReviewRecord {
     public void setReview(String review) {
         this.review = review;
     }
+
 }
 

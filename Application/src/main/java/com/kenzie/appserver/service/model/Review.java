@@ -1,5 +1,8 @@
 package com.kenzie.appserver.service.model;
 
+import java.util.Random;
+import java.util.UUID;
+
 public class Review {
     private final String review;
     private final String restaurantId;

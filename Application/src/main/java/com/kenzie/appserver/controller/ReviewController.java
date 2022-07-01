@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 public class ReviewController {
 
     private ReviewService reviewService;
@@ -43,9 +43,16 @@ public class ReviewController {
         return null;
     }
 
-    @DeleteMapping
-    public ResponseEntity<ReviewResponse> deleteReview() {
-        return null;
+    @DeleteMapping("/{userid}")
+    public ResponseEntity deleteReview(@PathVariable("userid") String userId) {
+        List<Review> reviewsList = reviewService.findAll();
+        for (Review review: reviewsList) {
+            if (review.getUserId().equals(userId)) {
+                reviewService.deleteReview(review);
+                return ResponseEntity.noContent().build();
+            }
+        }
+        return ResponseEntity.badRequest().body("Unable to find selected Review");
     }
 
     private ReviewResponse reviewToResponse (Review review) {
