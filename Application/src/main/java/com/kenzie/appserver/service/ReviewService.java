@@ -5,38 +5,33 @@ import com.kenzie.appserver.repositories.ReviewRepository;
 import com.kenzie.appserver.repositories.model.ReviewRecord;
 import com.kenzie.appserver.service.model.Restaurant;
 import com.kenzie.appserver.service.model.Review;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
 
+    @Autowired
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
-//    public List<Review> findByRestaurantId(String restaurantId) {
-//        List<Review> listOfReviews = new ArrayList<>();
-//        reviewRepository
-//                .findById(restaurantId)
-//                .forEach(review -> new Review(
-//                        review.getRestaurantId(),
-//                        review.getUserId(),
-//                        review.getRating(),
-//                        review.getReview()))
-//                .orElse(null);
-//
-//        return listOfReviews;
-//    }
+    public List<Review> findByRestaurantId(String restaurantId) {
+        if ((Objects.equals(restaurantId, "")) || restaurantId == null) {
+            throw new ReviewRecordNotFoundException();
+        }
 
-    public Review findByRestaurantId(String restaurantId) {
-        return reviewRepository
-                .findById(restaurantId)
-                .map(review -> toReview(review))
-                .orElse(null);
+        List<Review> listOfReviews = new ArrayList<>();
+        reviewRepository
+                .findByRestaurantId(restaurantId)
+                .forEach(review -> listOfReviews.add(toReview(review)));
+
+        return listOfReviews;
     }
 
     public List<Review> findAll() {
@@ -73,22 +68,21 @@ public class ReviewService {
     }
 
     public void deleteReview(Review review) {
-        ReviewRecord reviewRecord = toReviewRecord(review);
-        reviewRepository.delete(reviewRecord);
+        if (review == null) {
+            throw new ReviewRecordNotFoundException();
+        } else {
+            ReviewRecord reviewRecord = toReviewRecord(review);
+            reviewRepository.delete(reviewRecord);
+        }
     }
 
-    public ReviewRecord updateReview(ReviewRecord reviewRecord) {
-        return reviewRepository.findById(reviewRecord.getRestaurantId())
-                .map(review -> {
-                    review.setRestaurantId(reviewRecord.getRestaurantId());
-                    review.setUserId(reviewRecord.getUserId());
-                    review.setRating(reviewRecord.getRating());
-                    review.setReview(reviewRecord.getReview());
-                    return reviewRepository.save(reviewRecord);
-                })
-                .orElseGet(() -> {
-                    return reviewRepository.save(reviewRecord);
-                });
+    public Review updateReview(Review review) {
+        if (review == null) {
+            throw new ReviewRecordNotFoundException();
+        }
+            ReviewRecord reviewRecord = toReviewRecord(review);
+            reviewRepository.save(reviewRecord);
+            return review;
     }
 
 }

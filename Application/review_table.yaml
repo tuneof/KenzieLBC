@@ -32,13 +32,9 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "restaurantId"
           AttributeType: "S"
-        - AttributeName: "userId"
-          AttributeType: "S"
       KeySchema:
         - AttributeName: "restaurantId"
           KeyType: "HASH"
-        - AttributeName: "userId"
-          KeyType: "RANGE"
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: false
       BillingMode: PAY_PER_REQUEST
