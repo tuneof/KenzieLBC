@@ -23,7 +23,7 @@ public class QueryUtility {
 
     public class RestaurantControllerClient {
         public ResultActions getRestaurants() throws Exception {
-            return mvc.perform(get("/restaurant/all")
+            return mvc.perform(get("/restaurants/all")
                     .accept(MediaType.APPLICATION_JSON));
         }
 
@@ -31,12 +31,12 @@ public class QueryUtility {
 
     public class ReviewControllerClient {
         public ResultActions methodName(String id) throws Exception {
-            return mvc.perform(get("/review/{id}", id)
+            return mvc.perform(get("/reviews/{id}", id)
                     .accept(MediaType.APPLICATION_JSON));
         }
 
         public ResultActions addReview(ReviewCreateRequest createRequest) throws Exception {
-            return mvc.perform(post("/review/")
+            return mvc.perform(post("/reviews/")
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(createRequest)));

@@ -32,7 +32,7 @@ export default class ReviewClient extends BaseClass {
      */
      async findAll(errorCallback) {
         try {
-            const response = await this.client.get(`/review`);
+            const response = await this.client.get(`/reviews`);
             return response.data;
         } catch (error) {
             this.handleError("findAll", error, errorCallback);
@@ -44,7 +44,7 @@ export default class ReviewClient extends BaseClass {
      */
     async findByRestaurantId(id, errorCallback) {
         try {
-            const response = await this.client.get(`/review/${id}`);
+            const response = await this.client.get(`/reviews/${id}`);
             return response.data;
         } catch(error) {
             this.handleError("findByRestaurantId", error, errorCallback);
@@ -54,7 +54,7 @@ export default class ReviewClient extends BaseClass {
 
     async addReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.post(`/review`, {
+            const response = await this.client.post(`/reviews`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -68,7 +68,7 @@ export default class ReviewClient extends BaseClass {
 
     async updateReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.put(`review`, {
+            const response = await this.client.put(`/reviews`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -79,6 +79,19 @@ export default class ReviewClient extends BaseClass {
             this.handleError("updateReview", error, errorCallback);
         }
     }
+
+    //fix something
+        async deleteReview(restaurantId, userId, errorCallback) {
+            try {
+                const response = await this.client.delete(`/reviews`, {
+                    restaurantId: restaurantId,
+                    userId: userId
+                });
+                return response.data;
+            } catch (error) {
+                this.handleError("deleteReview", error, errorCallback);
+            }
+        }
 
     /**
      * Helper method to log the error and run any error functions.

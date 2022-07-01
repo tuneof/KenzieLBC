@@ -32,7 +32,7 @@ export default class RestaurantClient extends BaseClass {
 
     async getAllRestaurants(errorCallback) {
         try {
-            const response = await this.client.get(`/restaurant/all`);
+            const response = await this.client.get(`/restaurants/all`);
             return response.data;
         } catch (error) {
             this.handleError("getAllRestaurants", error, errorCallback);
