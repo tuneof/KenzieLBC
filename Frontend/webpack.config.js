@@ -17,9 +17,9 @@ module.exports = {
   },
   devServer: {
     https: true,
-    port: 8000,
+    port: 8080,
     open: true,
-    openPage: 'https://localhost:8000',
+    openPage: 'https://localhost:8080',
     // diableHostChecks, otherwise we get an error about headers and the page won't render
     disableHostCheck: true,
     contentBase: 'packaging_additional_published_artifacts',
