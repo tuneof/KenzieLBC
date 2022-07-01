@@ -80,18 +80,6 @@ export default class ReviewClient extends BaseClass {
         }
     }
 
-//fix something
-    async deleteReview(review, errorCallback) {
-        try {
-            const response = await this.client.delete(`review`, {
-                review: review
-            });
-            return response.data;
-        } catch (error) {
-            this.handleError("deleteReview", error, errorCallback);
-        }
-    }
-
     /**
      * Helper method to log the error and run any error functions.
      * @param error The error received from the server.
