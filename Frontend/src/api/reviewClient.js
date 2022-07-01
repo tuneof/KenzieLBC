@@ -32,7 +32,7 @@ export default class ReviewClient extends BaseClass {
      */
      async findAll(errorCallback) {
         try {
-            const response = await this.client.get(`/reviews`);
+            const response = await this.client.get(`/review`);
             return response.data;
         } catch (error) {
             this.handleError("findAll", error, errorCallback);
@@ -44,7 +44,7 @@ export default class ReviewClient extends BaseClass {
      */
     async findByRestaurantId(id, errorCallback) {
         try {
-            const response = await this.client.get(`/reviews/${id}`);
+            const response = await this.client.get(`/review/${id}`);
             return response.data;
         } catch(error) {
             this.handleError("findByRestaurantId", error, errorCallback);
@@ -54,7 +54,7 @@ export default class ReviewClient extends BaseClass {
 
     async addReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.post(`/reviews`, {
+            const response = await this.client.post(`/review`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -68,7 +68,7 @@ export default class ReviewClient extends BaseClass {
 
     async updateReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.put(`reviews`, {
+            const response = await this.client.put(`review`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -80,9 +80,10 @@ export default class ReviewClient extends BaseClass {
         }
     }
 
+//fix something
     async deleteReview(review, errorCallback) {
         try {
-            const response = await this.client.delete(`reviews`, {
+            const response = await this.client.delete(`review`, {
                 review: review
             });
             return response.data;

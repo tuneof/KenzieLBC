@@ -3,13 +3,14 @@ package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import com.kenzie.appserver.controller.model.ReviewResponse;
+import com.kenzie.appserver.controller.model.ReviewUpdateRequest;
+import com.kenzie.appserver.service.ReviewRecordNotFoundException;
 import com.kenzie.appserver.service.ReviewService;
 import com.kenzie.appserver.service.model.Review;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -39,13 +40,23 @@ public class ReviewController {
     }
 
     @PutMapping
-    public ResponseEntity<ReviewResponse> updateReview() {
-        return null;
+    public ResponseEntity<ReviewResponse> updateReview(@RequestBody ReviewUpdateRequest reviewUpdateRequest){
+        if (reviewUpdateRequest.getRestaurantId() == null || reviewUpdateRequest.getUserId() == null) {
+            throw new ReviewRecordNotFoundException();
+        }
+        Review updatedReview = new Review(reviewUpdateRequest.getRestaurantId(), reviewUpdateRequest.getUserId(),
+                reviewUpdateRequest.getRating(), reviewUpdateRequest.getReview());
+        reviewService.updateReview(updatedReview);
+
+        ReviewResponse reviewResponse = reviewToResponse(updatedReview);
+
+        return ResponseEntity.ok().body(reviewResponse);
     }
 
-    @DeleteMapping("/{userid}")
-    public ResponseEntity deleteReview(@PathVariable("userid") String userId) {
-        List<Review> reviewsList = reviewService.findAll();
+    @DeleteMapping("/{restaurantId}/{userId}")
+    public ResponseEntity deleteReview(@PathVariable("restaurantId") String restaurantId,
+                                       @PathVariable("userId") String userId) {
+        List<Review> reviewsList = reviewService.findByRestaurantId(restaurantId);
         for (Review review: reviewsList) {
             if (review.getUserId().equals(userId)) {
                 reviewService.deleteReview(review);

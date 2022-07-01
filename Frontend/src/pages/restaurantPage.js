@@ -17,8 +17,8 @@ class RestaurantPage extends BaseClass {
      * Once the page has loaded, set up the event handlers and fetch the concert list.
      */
     async mount() {
-//        document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
-//        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
+//document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
+//document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
         this.client = new RestaurantClient();
 
         this.dataStore.addChangeListener(this.renderRestaurant)
