@@ -27,6 +27,69 @@
             <button type="submit">Get</button>
         </form>
     </div>
+    <div class="card">
+        <h1>Reviews</h1>
+        <form class="card-content" id="get-reviews">
+            <button type="submit">Get All</button>
+        </form>
+        <form class="card-content" id="get-reviews-by-restaurantId">
+            <p class="form-field">
+                <label>Restaurant ID</label>
+                <input type="text" required class="validated-field" id="get-review-restaurantId">
+            </p>
+            <button type="submit">Get By Restaurant Id</button>
+        </form>
+
+        <form class="card-content" id="create-reviews">
+            <p class="form-field">
+                <label>Restaurant ID</label>
+                <input type="text" required class="validated-field" id="create-new-review-restaurantId">
+            </p>
+            <p class="form-field">
+                <label>User ID</label>
+                <input type="text" required class="validated-field" id="create-new-review-userId">
+            </p>
+            <p class="form-field">
+                <label>Rating</label>
+                <input type="text" required class="validated-field" id="create-new-review-rating">
+            </p>
+            <p class="form-field">
+                <label>Review</label>
+                <input type="text" required class="validated-field" id="create-new-review-review">
+            </p>
+            <button type="submit">Create</button>
+        </form>
+        <form class="card-content" id="update-reviews">
+            <p class="form-field">
+                <label>Restaurant ID</label>
+                <input type="text" required class="validated-field" id="update-review-restaurantId">
+            </p>
+            <p class="form-field">
+                <label>User ID</label>
+                <input type="text" required class="validated-field" id="update-review-userId">
+            </p>
+            <p class="form-field">
+                <label>Rating</label>
+                <input type="text" required class="validated-field" id="update-review-rating">
+            </p>
+            <p class="form-field">
+                <label>Review</label>
+                <input type="text" required class="validated-field" id="update-review-review">
+            </p>
+            <button type="submit">Update</button>
+        </form>
+        <form class="card-content" id="delete-reviews">
+            <p class="form-field">
+                <label>Restaurant ID</label>
+                <input type="text" required class="validated-field" id="delete-review-restaurantId">
+            </p>
+            <p class="form-field">
+                <label>User ID</label>
+                <input type="text" required class="validated-field" id="delete-review-userId">
+            </p>
+            <button type="submit">Delete</button>
+        </form>
+    </div>
     <div class="card" id="result">
         <h2>Result:</h2>
         <p id="result-info"></p>
