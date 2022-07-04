@@ -10,7 +10,7 @@ module.exports = {
   },
   entry: {
     restaurantPage: path.resolve(__dirname, 'src', 'pages', 'restaurantPage.js'),
-//    restaurantPage: path.resolve(__dirname, 'src', 'pages', 'reviewPage.js'),
+    restaurantClient: path.resolve(__dirname, 'src', 'api', 'restaurantClient.js'),
 },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -33,7 +33,7 @@ module.exports = {
 //             '/reviews'
 
            ],
-           target: 'http://localhost:5002'
+           target: 'http://localhost:5001'
         }
     ]
   },
