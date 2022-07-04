@@ -5,11 +5,11 @@ import RestaurantClient from "../api/restaurantClient";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class RestaurantPage extends BaseClass {
+class ReviewPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetReviews', 'onCreate', 'onUpdate', 'onDelete', 'renderRestaurant'], this);
+        this.bindClassMethods(['onGetReviews', 'onCreate', 'onUpdate', 'onDelete', 'renderReview'], this);
         this.dataStore = new DataStore();
     }
 
@@ -17,33 +17,35 @@ class RestaurantPage extends BaseClass {
      * Once the page has loaded, set up the event handlers and fetch the concert list.
      */
     async mount() {
-        document.getElementById('get-restaurants').addEventListener('submit', this.onGet);
-        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
+        document.getElementById('get-reviews').addEventListener('submit', this.onGet);
+        document.getElementById('create-review').addEventListener('submit', this.onGet);
+        document.getElementById('update-review').addEventListener('submit', this.onGet);
+        document.getElementById('delete-review').addEventListener('submit', this.onGet);
 
         this.client = new reviewClient();
 
         this.dataStore.addChangeListener(this.renderRestaurant)
-        this.onGetRestaurants();
+        this.onGetReviews();
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderRestaurants() {
+    async renderReview() {
         let resultArea = document.getElementById("result-info");
 
         const reviews = this.dataStore.get("reviews");
 
         if (reviews) {
-            let restaurantHTML = "<ul>";
-            for (let restaurant of restaurants) {
-                restaurantHTML += `<li>
+            let reviewHTML = "<ul>";
+            for (let review of reviews) {
+                reviewHTML += `<li>
                 <h3>${review.restaurantId}</h3>
                 <h4>${review.userId}</h4>
                 <h4>${review.rating}</h4>
                 <h4>${review.comment}</h4>
                 </li>`;
             }
-            resultArea.innerHTML = restaurantHTML + "</ul>";
+            resultArea.innerHTML = reviewHTML + "</ul>";
         } else {
             resultArea.innerHTML = "No Reviews";
         }
@@ -52,7 +54,7 @@ class RestaurantPage extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
         async onGetReviews() {
-            let result = await this.client.getAllRestaurants(this.errorHandler);
+            let result = await this.client.getAllReviews(this.errorHandler);
             this.dataStore.set("reviews", result);
         }
 
