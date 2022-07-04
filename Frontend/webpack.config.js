@@ -10,7 +10,7 @@ module.exports = {
   },
   entry: {
     restaurantPage: path.resolve(__dirname, 'src', 'pages', 'restaurantPage.js'),
-    restaurantClient: path.resolve(__dirname, 'src', 'api', 'restaurantClient.js'),
+    reviewPage: path.resolve(__dirname, 'src', 'pages', 'reviewPage.js')
 },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -29,9 +29,8 @@ module.exports = {
     proxy: [
         {
            context: [
-             '/restaurants'
-//             '/reviews'
-
+             '/restaurants',
+             '/reviews'
            ],
            target: 'http://localhost:5001'
         }
