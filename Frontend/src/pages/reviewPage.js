@@ -1,6 +1,6 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import RestaurantClient from "../api/restaurantClient";
+import ReviewClient from "../api/reviewClient";
 
 /**
  * Logic needed for the view playlist page of the website.
@@ -18,13 +18,13 @@ class ReviewPage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-reviews').addEventListener('submit', this.onGet);
-        document.getElementById('create-review').addEventListener('submit', this.onGet);
-        document.getElementById('update-review').addEventListener('submit', this.onGet);
-        document.getElementById('delete-review').addEventListener('submit', this.onGet);
+        document.getElementById('create-reviews').addEventListener('submit', this.onGet);
+        document.getElementById('update-reviews').addEventListener('submit', this.onGet);
+        document.getElementById('delete-reviews').addEventListener('submit', this.onGet);
 
-        this.client = new reviewClient();
+        this.client = new ReviewClient();
 
-        this.dataStore.addChangeListener(this.renderRestaurant)
+        this.dataStore.addChangeListener(this.renderReview)
         this.onGetReviews();
     }
 
@@ -62,12 +62,13 @@ class ReviewPage extends BaseClass {
             // Prevent the page from refreshing on form submit
             event.preventDefault();
 
-            let restaurantId = document.getElementById("create-restaurantId-field").value;
-            let userId = document.getElementById("create-userId-field").value;
-            let rating = document.getElementById("create-rating-field").value;
-            let review = document.getElementById("create-review-field").value;
+            let restaurantId = document.getElementById("create-new-review-restaurantId").value;
+            let userId = document.getElementById("create-new-review-userId").value;
+            let rating = document.getElementById("create-new-review-rating").value;
+            let review = document.getElementById("create-new-review-review").value;
 
-            const createdReview = await this.client.createExample(restaurantId, userId, rating, review ,this.errorHandler);
+            const createdReview = await this.client.addReview(restaurantId, userId, rating, review ,this.errorHandler);
+
             this.dataStore.set("reviews", createdReview);
 
             if (createdReview) {
@@ -81,12 +82,12 @@ class ReviewPage extends BaseClass {
         async onUpdate(event) {
             event.preventDefault();
 
-            let restaurantId = document.getElementById("create-restaurantId-field").value;
-            let userId = document.getElementById("create-userId-field").value;
-            let rating = document.getElementById("create-rating-field").value;
-            let review = document.getElementById("create-review-field").value;
+            let restaurantId = document.getElementById("create-new-review-restaurantId").value;
+            let userId = document.getElementById("create-new-review-userId").value;
+            let rating = document.getElementById("create-new-review-rating").value;
+            let review = document.getElementById("create-new-review-review").value;
 
-            const createdReview = await this.client.createExample(restaurantId, userId, rating, review ,this.errorHandler);
+            const createdReview = await this.client.updateReview(restaurantId, userId, rating, review ,this.errorHandler);
             this.dataStore.set("reviews", createdReview);
 
             if (createdReview) {
@@ -101,14 +102,14 @@ class ReviewPage extends BaseClass {
         async onDelete(event) {
             event.preventDefault();
 
-            let restaurantId = document.getElementById("create-restaurantId-field").value;
-            let userId = document.getElementById("create-userId-field").value;
+            let restaurantId = document.getElementById("create-new-review-restaurantId").value;
+            let userId = document.getElementById("create-new-review-userId").value;
 
-            const reviewToDelete = await this.client.createExample(restaurantId, userId, this.errorHandler);
+            const reviewToDelete = await this.client.deleteReview(restaurantId, userId, this.errorHandler);
             this.dataStore.set("reviews", reviewToDelete);
 
             if (createdReview) {
-                this.showMessage("The Review has been deleted"!")
+                this.showMessage("The Review has been deleted!")
             } else {
                 this.errorHandler("Could not find Review. Try Again.");
             }
