@@ -17,10 +17,11 @@ class ReviewPage extends BaseClass {
      * Once the page has loaded, set up the event handlers and fetch the concert list.
      */
     async mount() {
-        document.getElementById('get-reviews').addEventListener('submit', this.onGet);
-        document.getElementById('create-reviews').addEventListener('submit', this.onGet);
-        document.getElementById('update-reviews').addEventListener('submit', this.onGet);
-        document.getElementById('delete-reviews').addEventListener('submit', this.onGet);
+        document.getElementById('get-reviews').addEventListener('submit', this.onGetReviews);
+        document.getElementById('get-reviews-by-restaurantId').addEventListener('submit', this.onGetReviews);
+        document.getElementById('create-reviews').addEventListener('submit', this.onCreate);
+        document.getElementById('update-reviews').addEventListener('submit', this.onUpdate);
+        document.getElementById('delete-reviews').addEventListener('submit', this.onDelete);
 
         this.client = new ReviewClient();
 
@@ -54,6 +55,12 @@ class ReviewPage extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
         async onGetReviews() {
+            let result = await this.client.findAll(this.errorHandler);
+            this.dataStore.set("reviews", result);
+        }
+
+        async onGetReviewById() {
+            let restaurantId = document.getElementById('get-review-restaurantId')
             let result = await this.client.getAllReviews(this.errorHandler);
             this.dataStore.set("reviews", result);
         }
@@ -67,7 +74,7 @@ class ReviewPage extends BaseClass {
             let rating = document.getElementById("create-new-review-rating").value;
             let review = document.getElementById("create-new-review-review").value;
 
-            const createdReview = await this.client.addReview(restaurantId, userId, rating, review ,this.errorHandler);
+            const createdReview = await this.client.addReview(restaurantId, userId, rating, review, this.errorHandler);
 
             this.dataStore.set("reviews", createdReview);
 
@@ -82,12 +89,13 @@ class ReviewPage extends BaseClass {
         async onUpdate(event) {
             event.preventDefault();
 
-            let restaurantId = document.getElementById("create-new-review-restaurantId").value;
-            let userId = document.getElementById("create-new-review-userId").value;
-            let rating = document.getElementById("create-new-review-rating").value;
-            let review = document.getElementById("create-new-review-review").value;
+            let restaurantId = document.getElementById("update-review-restaurantId").value;
+            let userId = document.getElementById("update-review-userId").value;
+            let rating = document.getElementById("update-review-rating").value;
+            let review = document.getElementById("update-review-review").value;
 
-            const createdReview = await this.client.updateReview(restaurantId, userId, rating, review ,this.errorHandler);
+            const createdReview = await this.client.updateReview(restaurantId, userId, rating, review, this.errorHandler);
+
             this.dataStore.set("reviews", createdReview);
 
             if (createdReview) {
@@ -106,6 +114,7 @@ class ReviewPage extends BaseClass {
             let userId = document.getElementById("create-new-review-userId").value;
 
             const reviewToDelete = await this.client.deleteReview(restaurantId, userId, this.errorHandler);
+
             this.dataStore.set("reviews", reviewToDelete);
 
             if (createdReview) {
