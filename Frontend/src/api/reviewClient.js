@@ -32,7 +32,7 @@ export default class ReviewClient extends BaseClass {
      */
      async findAll(errorCallback) {
         try {
-            const response = await this.client.get(`/reviews/all`);
+            const response = await this.client.get(`/reviews`);
             return response.data;
         } catch (error) {
             this.handleError("findAll", error, errorCallback);
@@ -68,7 +68,7 @@ export default class ReviewClient extends BaseClass {
 
     async updateReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.put(`/reviews`, {
+            const response = await this.client.put(`/reviews/${restaurantId}/${userId}`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,

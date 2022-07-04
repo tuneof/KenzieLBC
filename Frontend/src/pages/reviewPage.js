@@ -61,8 +61,8 @@ class ReviewPage extends BaseClass {
 
         async onGetReviewById() {
             let restaurantId = document.getElementById('get-review-restaurantId')
-            let result = await this.client.findByRestaurantId(restaurantId, this.errorHandler);
-            this.dataStore.set("reviews", result)
+            let result = await this.client.getAllReviews(this.errorHandler);
+            this.dataStore.set("reviews", result);
         }
 
         async onCreate(event) {
@@ -94,6 +94,7 @@ class ReviewPage extends BaseClass {
             let review = document.getElementById("update-review-review").value;
 
             const createdReview = await this.updateReview(restaurantId, userId, rating, review, this.errorHandler);
+
             this.dataStore.set("reviews", createdReview);
 
             if (createdReview) {
@@ -112,10 +113,11 @@ class ReviewPage extends BaseClass {
             let userId = document.getElementById("create-userId-field").value;
 
             const reviewToDelete = await this.client.deleteReview(restaurantId, userId, this.errorHandler);
+
             this.dataStore.set("reviews", reviewToDelete);
 
             if (createdReview) {
-                this.showMessage("The Review has been deleted"!")
+                this.showMessage("The Review has been deleted!")
             } else {
                 this.errorHandler("Could not find Review. Try Again.");
             }
