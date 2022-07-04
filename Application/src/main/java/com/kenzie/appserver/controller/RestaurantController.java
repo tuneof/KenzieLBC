@@ -20,9 +20,8 @@ public class RestaurantController {
         this.restaurantService = restaurantService;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<RestaurantResponse>> getRestaurant() {
-
         List<Restaurant> restaurants= restaurantService.findAll();
 
         List<RestaurantResponse> responses = restaurants.stream().map(this::restaurantToResponse).collect(Collectors.toList());
