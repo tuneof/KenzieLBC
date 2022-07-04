@@ -28,6 +28,10 @@ public class ReviewController {
     public ResponseEntity<List<ReviewResponse>> getReview() {
         List<Review> reviews = reviewService.findAll();
 
+        if(reviews == null || reviews.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
         List<ReviewResponse> responses = reviews.stream().map(review -> reviewToResponse(review)).collect(Collectors.toList());
 
         return ResponseEntity.ok(responses);
@@ -36,6 +40,10 @@ public class ReviewController {
     @GetMapping("/{restaurantId}")
     public ResponseEntity<List<ReviewResponse>> getReviewByRestaurantId(@PathVariable("restaurantId") String restaurantId) {
         List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
+
+        if (reviews == null || reviews.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
 
         List<ReviewResponse> responses = reviews.stream().map(review -> reviewToResponse(review)).collect(Collectors.toList());
 
