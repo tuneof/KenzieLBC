@@ -68,7 +68,7 @@ export default class ReviewClient extends BaseClass {
 
     async updateReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.put(`/reviews`, {
+            const response = await this.client.put(`/reviews/${restaurantId}/${userId}`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -83,7 +83,7 @@ export default class ReviewClient extends BaseClass {
     //fix something
         async deleteReview(restaurantId, userId, errorCallback) {
             try {
-                const response = await this.client.delete(`/reviews`, {
+                const response = await this.client.delete(`/reviews/${restaurantId}/${userId}`, {
                     restaurantId: restaurantId,
                     userId: userId
                 });
