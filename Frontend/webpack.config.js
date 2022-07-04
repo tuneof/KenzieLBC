@@ -10,7 +10,8 @@ module.exports = {
   },
   entry: {
     restaurantPage: path.resolve(__dirname, 'src', 'pages', 'restaurantPage.js'),
-  },
+    restaurantPage: path.resolve(__dirname, 'src', 'pages', 'reviewPage.js'),
+},
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
@@ -29,6 +30,8 @@ module.exports = {
         {
            context: [
              '/restaurants'
+             '/reviews'
+
            ],
            target: 'http://localhost:5001'
         }
@@ -40,6 +43,11 @@ module.exports = {
       filename: 'index.html',
       inject: false
     }),
+        new HtmlWebpackPlugin({
+          template: './src/index.html',
+          filename: 'review.html',
+          inject: false
+        }),
     new CopyPlugin({
       patterns: [
         {
