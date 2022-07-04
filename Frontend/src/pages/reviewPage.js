@@ -92,6 +92,7 @@ class RestaurantPage extends BaseClass {
             } else {
                 this.errorHandler("Review was not updated. Try Again.");
             }
+            // Re-displays all Reviews
             this.onGetReviews;
         }
 
@@ -109,6 +110,7 @@ class RestaurantPage extends BaseClass {
             } else {
                 this.errorHandler("Could not find Review. Try Again.");
             }
+            // Re-displays all Reviews
             this.onGetReviews;
         }
 }
