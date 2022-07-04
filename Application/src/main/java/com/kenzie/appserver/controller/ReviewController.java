@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reviews")
@@ -22,6 +23,25 @@ public class ReviewController {
     ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
+
+    @GetMapping
+    public ResponseEntity<List<ReviewResponse>> getReview() {
+        List<Review> reviews = reviewService.findAll();
+
+        List<ReviewResponse> responses = reviews.stream().map(review -> reviewToResponse(review)).collect(Collectors.toList());
+
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<List<ReviewResponse>> getReviewByRestaurantId(@PathVariable("restaurantId") String restaurantId) {
+        List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
+
+        List<ReviewResponse> responses = reviews.stream().map(review -> reviewToResponse(review)).collect(Collectors.toList());
+
+        return ResponseEntity.ok(responses);
+    }
+
 
     @PostMapping
     public ResponseEntity<ReviewResponse> addNewReview(@RequestBody ReviewCreateRequest reviewCreateRequest) {

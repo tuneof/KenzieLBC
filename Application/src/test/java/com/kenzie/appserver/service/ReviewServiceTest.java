@@ -235,14 +235,4 @@ public class ReviewServiceTest {
         assertEquals(userReview3.getRating(), reviewListReturned.get(2).getRating(), "Rating does not match");
         assertEquals(userReview3.getReview(), reviewListReturned.get(2).getReview(), "Review does not match");
     }
-
-    @Test
-    void deleteReview() {
-        //soon
-    }
-
-    @Test
-    void updateReview() {
-        //soon
-    }
 }
