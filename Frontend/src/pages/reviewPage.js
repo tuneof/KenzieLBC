@@ -18,7 +18,7 @@ class ReviewPage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-reviews').addEventListener('submit', this.onGetReviews);
-        document.getElementById('get-reviews-by-restaurantId').addEventListener('submit', this.onGetReviews);
+        document.getElementById('get-reviews-by-restaurantId').addEventListener('submit', this.onGetReviewById);
         document.getElementById('create-reviews').addEventListener('submit', this.onCreate);
         document.getElementById('update-reviews').addEventListener('submit', this.onUpdate);
         document.getElementById('delete-reviews').addEventListener('submit', this.onDelete);

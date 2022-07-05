@@ -11,8 +11,8 @@ public class ReviewResponse {
     private String userId;
     @JsonProperty("rating")
     private String rating;
-    @JsonProperty("comment")
-    private String comment;
+    @JsonProperty("review")
+    private String review;
 
     public String getRestaurantId() {
         return restaurantId;
@@ -38,11 +38,11 @@ public class ReviewResponse {
         this.rating = rating;
     }
 
-    public String getComment() {
-        return comment;
+    public String getReview() {
+        return review;
     }
 
-    public void setReview(String comment) {
-        this.comment = comment;
+    public void setReview(String review) {
+        this.review = review;
     }
 }
