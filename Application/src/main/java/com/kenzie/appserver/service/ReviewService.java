@@ -25,7 +25,12 @@ public class ReviewService {
         if ((Objects.equals(restaurantId, "")) || restaurantId == null) {
             throw new ReviewRecordNotFoundException();
         }
-
+        List<Review> allReviews = this.findAll();
+        for (Review review : allReviews) {
+            if (!Objects.equals(review.getRestaurantId(), restaurantId)) {
+                throw new ReviewRecordNotFoundException();
+            }
+        }
         List<Review> listOfReviews = new ArrayList<>();
         reviewRepository
                 .findByRestaurantId(restaurantId)

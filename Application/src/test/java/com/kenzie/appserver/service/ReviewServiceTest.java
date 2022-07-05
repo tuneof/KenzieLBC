@@ -148,6 +148,7 @@ public class ReviewServiceTest {
         recordList.add(record1);
         recordList.add(record2);
 
+        when(reviewRepository.findAll()).thenReturn(recordList);
         when(reviewRepository.findByRestaurantId(any())).thenReturn(recordList);
 
         //WHEN
