@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].js',
   },
   devServer: {
-    https: true,
+    https: false,
     port: 8080,
     open: true,
     openPage: 'http://localhost:8080',

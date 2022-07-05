@@ -117,7 +117,7 @@ class ReviewPage extends BaseClass {
 
             this.dataStore.set("reviews", reviewToDelete);
 
-            if (createdReview) {
+            if (reviewToDelete) {
                 this.showMessage("The Review has been deleted!")
             } else {
                 this.errorHandler("Could not find Review. Try Again.");
