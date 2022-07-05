@@ -9,7 +9,7 @@ class ReviewPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetReviews', 'onCreate', 'onUpdate', 'onDelete', 'renderReview'], this);
+        this.bindClassMethods(['onGetReviews', 'onGetReviewById', 'onCreate', 'onUpdate', 'onDelete', 'renderReview'], this);
         this.dataStore = new DataStore();
     }
 
@@ -40,10 +40,10 @@ class ReviewPage extends BaseClass {
             let reviewHTML = "<ul>";
             for (let review of reviews) {
                 reviewHTML += `<li>
-                <h3>${review.restaurantId}</h3>
-                <h4>${review.userId}</h4>
-                <h4>${review.rating}</h4>
-                <h4>${review.comment}</h4>
+                <h3>Restaurant id: ${review.restaurantId}</h3>
+                <h4>User id: ${review.userId}</h4>
+                <h4>rating: ${review.rating}</h4>
+                <h4>review: ${review.comment}</h4>
                 </li>`;
             }
             resultArea.innerHTML = reviewHTML + "</ul>";
@@ -60,8 +60,8 @@ class ReviewPage extends BaseClass {
         }
 
         async onGetReviewById() {
-            let restaurantId = document.getElementById('get-review-restaurantId')
-            let result = await this.client.getAllReviews(this.errorHandler);
+            let restaurantId = document.getElementById('get-review-restaurantId').value;
+            let result = await this.client.findByRestaurantId(restaurantId, this.errorHandler);
             this.dataStore.set("reviews", result);
         }
 
@@ -110,8 +110,8 @@ class ReviewPage extends BaseClass {
         async onDelete(event) {
             event.preventDefault();
 
-            let restaurantId = document.getElementById("create-new-review-restaurantId").value;
-            let userId = document.getElementById("create-new-review-userId").value;
+            let restaurantId = document.getElementById("delete-review-restaurantId").value;
+            let userId = document.getElementById("delete-review-userId").value;
 
             const reviewToDelete = await this.client.deleteReview(restaurantId, userId, this.errorHandler);
 
