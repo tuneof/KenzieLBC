@@ -59,7 +59,9 @@ class ReviewPage extends BaseClass {
             this.dataStore.set("reviews", result);
         }
 
-        async onGetReviewById() {
+        async onGetReviewById(event) {
+            event.preventDefault();
+
             let restaurantId = document.getElementById('get-review-restaurantId').value;
             let result = await this.client.findByRestaurantId(restaurantId, this.errorHandler);
             this.dataStore.set("reviews", result);

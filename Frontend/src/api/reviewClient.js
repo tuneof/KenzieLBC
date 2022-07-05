@@ -42,9 +42,9 @@ export default class ReviewClient extends BaseClass {
     /**
      * Find reviews by Restaurant Id
      */
-    async findByRestaurantId(id, errorCallback) {
+    async findByRestaurantId(restaurantId, errorCallback) {
         try {
-            const response = await this.client.get(`/reviews/${id}`);
+            const response = await this.client.get(`/reviews/${restaurantId}`);
             return response.data;
         } catch(error) {
             this.handleError("findByRestaurantId", error, errorCallback);
@@ -68,7 +68,7 @@ export default class ReviewClient extends BaseClass {
 
     async updateReview(restaurantId, userId, rating, review, errorCallback) {
         try {
-            const response = await this.client.put(`/reviews/${restaurantId}/${userId}`, {
+            const response = await this.client.put(`/reviews/${restaurantId}`, {
                 restaurantId: restaurantId,
                 userId: userId,
                 rating: rating,
@@ -83,7 +83,7 @@ export default class ReviewClient extends BaseClass {
     //fix something
         async deleteReview(restaurantId, userId, errorCallback) {
             try {
-                const response = await this.client.delete(`/reviews/${restaurantId}/${userId}`, {
+                const response = await this.client.delete(`/reviews/${restaurantId}`, {
                     restaurantId: restaurantId,
                     userId: userId
                 });

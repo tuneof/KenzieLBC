@@ -67,7 +67,7 @@ public class ReviewController {
         return ResponseEntity.ok().body(response);
     }
 
-    @PutMapping
+    @PutMapping("/{restaurantId}")
     public ResponseEntity<ReviewResponse> updateReview(@RequestBody ReviewUpdateRequest reviewUpdateRequest){
         if (reviewUpdateRequest.getRestaurantId() == null || reviewUpdateRequest.getUserId() == null) {
             throw new ReviewRecordNotFoundException();
