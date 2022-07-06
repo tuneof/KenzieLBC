@@ -32,7 +32,7 @@ public class QueryUtility {
 
     public class ReviewControllerClient {
         public ResultActions updateReview(ReviewUpdateRequest updateRequest) throws Exception {
-            return mvc.perform(put("/reviews/")
+            return mvc.perform(put("/reviews/{restaurantId}", updateRequest.getRestaurantId())
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(updateRequest)));
@@ -45,8 +45,8 @@ public class QueryUtility {
                     .content(mapper.writeValueAsString(createRequest)));
         }
 
-        public ResultActions deleteReview(String restaurantId, String userId) throws Exception {
-            return mvc.perform(delete("/reviews/{restaurantId}/{userId}", restaurantId, userId)
+        public ResultActions deleteReview(String restaurantId) throws Exception {
+            return mvc.perform(delete("/reviews/{restaurantId}", restaurantId)
                     .accept(MediaType.APPLICATION_JSON));
         }
 

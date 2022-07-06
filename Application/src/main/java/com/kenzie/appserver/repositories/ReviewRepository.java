@@ -8,6 +8,4 @@ import java.util.List;
 
 @EnableScan
 public interface ReviewRepository extends CrudRepository<ReviewRecord, String> {
-    List<ReviewRecord> findByRestaurantId(String restaurantId);
-
 }

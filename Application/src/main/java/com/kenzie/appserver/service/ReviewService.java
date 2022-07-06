@@ -21,22 +21,32 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<Review> findByRestaurantId(String restaurantId) {
+    public Review findByRestaurantId(String restaurantId) {
         if ((Objects.equals(restaurantId, "")) || restaurantId == null) {
             throw new ReviewRecordNotFoundException();
         }
-        List<Review> allReviews = this.findAll();
-        for (Review review : allReviews) {
-            if (!Objects.equals(review.getRestaurantId(), restaurantId)) {
-                throw new ReviewRecordNotFoundException();
-            }
+//        List<Review> allReviews = this.findAll();
+//        for (Review review : allReviews) {
+//            if (!Objects.equals(review.getRestaurantId(), restaurantId)) {
+//                throw new ReviewRecordNotFoundException();
+//            }
+//        }
+//        List<Review> listOfReviews = new ArrayList<>();
+//        reviewRepository
+//                .findByRestaurantId(restaurantId)
+//                .forEach(review -> listOfReviews.add(toReview(review)));
+//
+//        return listOfReviews;
+        if (reviewRepository.findById(restaurantId) == null) {
+            throw new ReviewRecordNotFoundException();
         }
-        List<Review> listOfReviews = new ArrayList<>();
-        reviewRepository
-                .findByRestaurantId(restaurantId)
-                .forEach(review -> listOfReviews.add(toReview(review)));
-
-        return listOfReviews;
+        return reviewRepository
+                .findById(restaurantId)
+                .map(review -> new Review(review.getRestaurantId(),
+                        review.getUserId(),
+                        review.getRating(),
+                        review.getReview()))
+                .orElse(null);
     }
 
     public List<Review> findAll() {
@@ -72,13 +82,11 @@ public class ReviewService {
         return review;
     }
 
-    public void deleteReview(Review review) {
-        if (review == null) {
+    public void deleteReview(String restaurantId) {
+        if (restaurantId == null) {
             throw new ReviewRecordNotFoundException();
-        } else {
-            ReviewRecord reviewRecord = toReviewRecord(review);
-            reviewRepository.delete(reviewRecord);
         }
+        reviewRepository.deleteById(restaurantId);
     }
 
     public Review updateReview(Review review) {

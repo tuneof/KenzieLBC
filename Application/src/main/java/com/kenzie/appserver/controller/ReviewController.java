@@ -38,16 +38,16 @@ public class ReviewController {
     }
 
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<List<ReviewResponse>> getReviewByRestaurantId(@PathVariable("restaurantId") String restaurantId) {
-        List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
+    public ResponseEntity<ReviewResponse> getReviewByRestaurantId(@PathVariable("restaurantId") String restaurantId) {
+        Review review = reviewService.findByRestaurantId(restaurantId);
 
-        if (reviews == null || reviews.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        if (review == null) {
+            return ResponseEntity.notFound().build();
         }
 
-        List<ReviewResponse> responses = reviews.stream().map(review -> reviewToResponse(review)).collect(Collectors.toList());
+        ReviewResponse response = reviewToResponse(review);
 
-        return ResponseEntity.ok(responses);
+        return ResponseEntity.ok(response);
     }
 
 
@@ -81,17 +81,10 @@ public class ReviewController {
         return ResponseEntity.ok().body(reviewResponse);
     }
 
-    @DeleteMapping("/{restaurantId}/{userId}")
-    public ResponseEntity deleteReview(@PathVariable("restaurantId") String restaurantId,
-                                       @PathVariable("userId") String userId) {
-        List<Review> reviewsList = reviewService.findByRestaurantId(restaurantId);
-        for (Review review: reviewsList) {
-            if (review.getUserId().equals(userId)) {
-                reviewService.deleteReview(review);
-                return ResponseEntity.noContent().build();
-            }
-        }
-        return ResponseEntity.badRequest().body("Unable to find selected Review");
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity deleteReview(@PathVariable("restaurantId") String restaurantId) {
+        reviewService.deleteReview(restaurantId);
+        return ResponseEntity.noContent().build();
     }
 
     private ReviewResponse reviewToResponse (Review review) {
