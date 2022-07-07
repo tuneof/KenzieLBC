@@ -13,7 +13,7 @@ export default class RestaurantClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getAllRestaurants'];
+        const methodsToBind = ['clientLoaded', 'getAllRestaurants', 'getRestaurant', 'createRestaurant'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -39,31 +39,31 @@ export default class RestaurantClient extends BaseClass {
         }
     }
 
-    /**
-     * Gets the concert for the given ID.
-     * @param id Unique identifier for a concert
-     * @param errorCallback (Optional) A function to execute if the call fails.
-     * @returns The concert
-     */
-//    async getExample(id, errorCallback) {
-//        try {
-//            const response = await this.client.get(`/example/${id}`);
-//            return response.data;
-//        } catch (error) {
-//            this.handleError("getConcert", error, errorCallback)
-//        }
-//    }
+    async getRestaurant(restaurantId, errorCallback) {
+        try {
+            const response = await this.client.get(`/restaurants/${restaurantId}`);
+            return response.data;
+        } catch (error) {
+            this.handleError("getConcert", error, errorCallback)
+        }
+    }
 
-//    async createExample(name, errorCallback) {
-//        try {
-//            const response = await this.client.post(`example`, {
-//                name: name
-//            });
-//            return response.data;
-//        } catch (error) {
-//            this.handleError("createExample", error, errorCallback);
-//        }
-//    }
+    async createRestaurant(restaurantId, restaurantName, rating, status, cuisine, location, menu, errorCallback) {
+        try {
+            const response = await this.client.post(`/restaurants`, {
+                restaurantId: restaurantId,
+                restaurantName: restaurantName,
+                rating: rating,
+                status: status,
+                cuisine: cuisine,
+                location: location,
+                menu: menu
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError("createRestaurant", error, errorCallback);
+        }
+    }
 
     /**
      * Helper method to log the error and run any error functions.

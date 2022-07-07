@@ -65,7 +65,7 @@ public class ReviewControllerTest {
         Review userReview = new Review(restaurantId,userId, review, rating);
         Review persistedUserReview = reviewService.addReview(userReview);
 
-        queryUtility.reviewControllerClient.deleteReview(persistedUserReview.getRestaurantId(), persistedUserReview.getUserId())
+        queryUtility.reviewControllerClient.deleteReview(persistedUserReview.getRestaurantId())
                 .andExpect(status().isNoContent());
     }
 

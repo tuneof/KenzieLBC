@@ -9,9 +9,7 @@
     <header class="header" id="header">
         <div class="site-title">
             <a class="header_home" href="review.html">Yummy Food</a>
-        </div>
-        <div>
-            <a href="index.html">Go to Restaurants Page</a>
+            <a class="header_nav_link button" href="index.html">Restaurants</a>
         </div>
     </header>
     <div class="card">
@@ -39,7 +37,7 @@
             </p>
             <p class="form-field">
                 <label>Rating</label>
-                <input type="text" required class="validated-field" id="create-new-review-rating">
+                <input type="text" required class="validated-field" id="create-new-review-rating" placeholder="Number (1-5)">
             </p>
             <p class="form-field">
                 <label>Review</label>
@@ -76,16 +74,20 @@
                 <label>Restaurant ID</label>
                 <input type="text" required class="validated-field" id="delete-review-restaurantId">
             </p>
-            <p class="form-field">
-                <label>User ID</label>
-                <input type="text" required class="validated-field" id="delete-review-userId">
-            </p>
+<!--            <p class="form-field">-->
+<!--                <label>User ID</label>-->
+<!--                <input type="text" required class="validated-field" id="delete-review-userId">-->
+<!--            </p>-->
             <button type="submit">Delete</button>
         </form><br/><br/>
     </div>
     <div class="card" id="result">
-        <h2>Result:</h2>
+        <h2>Restaurant Reviews:</h2>
         <p id="result-info"></p>
     </div>
+<!--    <div class="card" id="restaurant-result">-->
+<!--        <h2>Review for the Restaurant:</h2>-->
+<!--        <p id="restaurant-result-info"></p>-->
+<!--    </div>-->
 </body>
 </html>

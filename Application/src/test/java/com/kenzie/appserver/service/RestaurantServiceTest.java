@@ -6,11 +6,13 @@ import com.kenzie.appserver.service.model.Restaurant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.*;
 
@@ -117,5 +119,49 @@ public class RestaurantServiceTest {
         // THEN
         Assertions.assertNotNull(result, "Expected list to return all restaurants");
         verify(restaurantRepository).findAll();
+    }
+
+    @Test
+    void canCreateNewRestaurant() {
+        String id = randomUUID().toString();
+        String name = "Restaurant Name";
+        String rating = "3";
+        String status = "active";
+        String cuisine = "cuisine";
+        String location = "location";
+        List<String> menu = new ArrayList<>();
+        menu.add("fries");
+        menu.add("shake");
+
+        Restaurant restaurant = new Restaurant(id, name, rating, status, cuisine, location, menu);
+        ArgumentCaptor<RestaurantRecord> restaurantRecordCaptor = ArgumentCaptor.forClass(RestaurantRecord.class);
+
+        Restaurant returnedRestaurant = restaurantService.addRestaurant(restaurant);
+
+        verify(restaurantRepository).save(restaurantRecordCaptor.capture());
+        RestaurantRecord restaurantRecord = restaurantRecordCaptor.getValue();
+
+        Assertions.assertNotNull(restaurantRecord, "The restaurant is saved");
+        Assertions.assertEquals(restaurantRecord.getRestaurantId(), restaurant.getRestaurantId(), "The restaurant id matches");
+        Assertions.assertEquals(restaurantRecord.getRestaurantName(), restaurant.getRestaurantName(), "The name matches");
+        Assertions.assertEquals(restaurantRecord.getRating(), restaurant.getRating(), "The rating matches");
+        Assertions.assertEquals(restaurantRecord.getCuisine(), restaurant.getCuisine(), "The cuisine matches");
+        Assertions.assertEquals(restaurantRecord.getLocation(), restaurant.getLocation(), "The location matches");
+        Assertions.assertEquals(restaurantRecord.getStatus(), restaurant.getStatus(), "The status matches");
+        Assertions.assertEquals(restaurantRecord.getMenu(), restaurant.getMenu(), "The menu matches");
+
+        Assertions.assertNotNull(returnedRestaurant, "The restaurant is saved");
+        Assertions.assertEquals(returnedRestaurant.getRestaurantId(), restaurant.getRestaurantId(), "The restaurant id matches");
+        Assertions.assertEquals(returnedRestaurant.getRestaurantName(), restaurant.getRestaurantName(), "The name matches");
+        Assertions.assertEquals(returnedRestaurant.getRating(), restaurant.getRating(), "The rating matches");
+        Assertions.assertEquals(returnedRestaurant.getCuisine(), restaurant.getCuisine(), "The cuisine matches");
+        Assertions.assertEquals(returnedRestaurant.getLocation(), restaurant.getLocation(), "The location matches");
+        Assertions.assertEquals(returnedRestaurant.getStatus(), restaurant.getStatus(), "The status matches");
+        Assertions.assertEquals(returnedRestaurant.getMenu(), restaurant.getMenu(), "The menu matches");
+    }
+
+    @Test
+    void findById_emptyRestaurantId_throwsException() {
+        assertThrows(RestaurantRecordNotFoundException.class, () -> restaurantService.findById(null));
     }
 }

@@ -81,12 +81,9 @@ export default class ReviewClient extends BaseClass {
     }
 
     //fix something
-        async deleteReview(restaurantId, userId, errorCallback) {
+        async deleteReview(restaurantId, errorCallback) {
             try {
-                const response = await this.client.delete(`/reviews/${restaurantId}`, {
-                    restaurantId: restaurantId,
-                    userId: userId
-                });
+                const response = await this.client.delete(`/reviews/${restaurantId}`);
                 return response.data;
             } catch (error) {
                 this.handleError("deleteReview", error, errorCallback);

@@ -26,6 +26,7 @@ class ReviewPage extends BaseClass {
         this.client = new ReviewClient();
 
         this.dataStore.addChangeListener(this.renderReview)
+        this.dataStore.addChangeListener(this.renderSingleReview)
         this.onGetReviews();
     }
 
@@ -50,7 +51,23 @@ class ReviewPage extends BaseClass {
         } else {
             resultArea.innerHTML = "No Reviews";
         }
+
+        let resultArea2 = document.getElementById("restaurant-result-info");
+
+        const review = this.dataStore.get("review");
+
+        if (review) {
+            resultArea.innerHTML = `
+                <div>Restaurant ID: ${review.restaurantId}</div>
+                <div>By User ID: ${review.userId}</div>
+                <div>Rating for Restaurant: ${review.rating}</div>
+                <div>Review Written: ${review.review}</div>
+            `;
+        } else {
+            resultArea2.innerHTML = "No Reviews";
+        }
     }
+
 
     // Event Handlers --------------------------------------------------------------------------------------------------
 
@@ -64,7 +81,7 @@ class ReviewPage extends BaseClass {
 
             let restaurantId = document.getElementById('get-review-restaurantId').value;
             let result = await this.client.findByRestaurantId(restaurantId, this.errorHandler);
-            this.dataStore.set("reviews", result);
+            this.dataStore.set("review", result);
         }
 
         async onCreate(event) {
@@ -85,7 +102,7 @@ class ReviewPage extends BaseClass {
             } else {
                 this.errorHandler("Review was not created. Try Again.");
             }
-            this.onGetReviews;
+            this.onGetReviews();
         }
 
         async onUpdate(event) {
@@ -106,16 +123,16 @@ class ReviewPage extends BaseClass {
                 this.errorHandler("Review was not updated. Try Again.");
             }
             // Re-displays all Reviews
-            this.onGetReviews;
+            this.onGetReviews();
         }
 
         async onDelete(event) {
             event.preventDefault();
 
             let restaurantId = document.getElementById("delete-review-restaurantId").value;
-            let userId = document.getElementById("delete-review-userId").value;
+//            let userId = document.getElementById("delete-review-userId").value;
 
-            const reviewToDelete = await this.client.deleteReview(restaurantId, userId, this.errorHandler);
+            const reviewToDelete = await this.client.deleteReview(restaurantId, this.errorHandler);
 
             this.dataStore.set("reviews", reviewToDelete);
 
@@ -125,7 +142,7 @@ class ReviewPage extends BaseClass {
                 this.errorHandler("Could not find Review. Try Again.");
             }
             // Re-displays all Reviews
-            this.onGetReviews;
+            this.onGetReviews();
         }
 }
 

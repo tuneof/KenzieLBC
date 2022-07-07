@@ -9,29 +9,33 @@
     <header class="header" id="header">
         <div class="site-title">
             <a class="header_home" href="index.html">Yummy Food</a>
-        </div>
-        <div>
-            <a href="review.html">Go to Reviews Page</a>
+            <a class="header_nav_link button" href="review.html">Reviews</a>
         </div>
     </header>
+    <p class="about">
+        Welcome to Yummy Food. We will present you with the best Restaurants available!
+    </p>
     <div class="card">
         <h2>Restaurants</h2>
+        <form class="card-content" id="generate-restaurants">
+            <button type="submit">Generate Restaurants</button>
+        </form>
         <form class="card-content" id="get-restaurants">
-            <button type="submit">Get All</button>
+            <button type="submit">Display Restaurants</button>
         </form>
     </div>
     <div class="card">
-        <h2>Find your Restaurant</h2>
+        <h3>Restaurant Details</h3>
         <form class="card-content" id="get-by-restaurant-id">
             <p class="form-field">
-                <label>Please enter the Restaurant ID</label>
-                <input type="text" required class="validated-field" id="create-review-restaurantId">
+                <label>Discover more about a restaurant</label>
+                <input type="text" required class="validated-field" id="restaurant-id" placeholder="Restaurant ID goes here...">
             </p>
-            <button type="submit">Get</button>
+            <button type="submit">Discover</button>
         </form>
     </div>
     <div class="card" id="result">
-        <h2>Showing Restaurants:</h2>
+        <h3>Showing Restaurant(s):</h3>
         <p id="restaurant-info"></p>
     </div>
 <!--    <script src="restaurantPage.js"></script>-->
