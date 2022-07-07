@@ -91,7 +91,6 @@ class RestaurantPage extends BaseClass {
     async generateRestaurants(event) {
         event.preventDefault();
 
-
         const restaurant1 = await this.client.createRestaurant('1', 'McBonalds', '5', 'OPEN', 'Indian', 'New York, NY', ['Tandoori Chicken', 'Lamb Curry', 'Chicken Tikka Masala']);
         //this.dataStore.set("restaurants", restaurant1);
         const restaurant2 = await this.client.createRestaurant('2', 'KBBQ All You Can Eat', '4', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
