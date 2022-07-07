@@ -9,7 +9,7 @@ class RestaurantPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetRestaurants', 'renderRestaurant'], this);
+        this.bindClassMethods(['onGetRestaurants', 'renderRestaurant', 'onGetRestaurantById'], this);
         this.dataStore = new DataStore();
     }
 
@@ -17,8 +17,8 @@ class RestaurantPage extends BaseClass {
      * Once the page has loaded, set up the event handlers and fetch the concert list.
      */
     async mount() {
-        //document.getElementById('get-restaurants').addEventListener('submit', this.onGetRestaurants);
-        //document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGet);
+        document.getElementById('get-restaurants').addEventListener('submit', this.onGetRestaurants);
+        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGetRestaurant);
         this.client = new RestaurantClient();
 
         this.dataStore.addChangeListener(this.renderRestaurant)
@@ -27,7 +27,7 @@ class RestaurantPage extends BaseClass {
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderRestaurants() {
+    async renderRestaurant() {
         let resultArea = document.getElementById("restaurant-info");
 
         const restaurants = this.dataStore.get("restaurants");
@@ -36,18 +36,39 @@ class RestaurantPage extends BaseClass {
             let restaurantHTML = "<ul>";
             for (let restaurant of restaurants) {
                 restaurantHTML += `<li>
-                <h3>${restaurant.restaurantId}</h3>
-                <h4>${restaurant.restaurantName}</h4>
-                <h4>${restaurant.rating}</h4>
-                <h4>${restaurant.status}</h4>
-                <h4>${restaurant.cuisine}</h4>
-                <h4>${restaurant.location}</h4>
-                <h4>${restaurant.menu}</h4>
+                <h5>Restaurant Name: ${restaurant.restaurantName}</h5>
+                <div>Restaurant ID: ${restaurant.restaurantId}</div>
+                <div>Restaurant Rating: ${restaurant.rating}</div>
                 </li>`;
             }
             resultArea.innerHTML = restaurantHTML + "</ul>";
         } else {
-            resultArea.innerHTML = "No Restaurants";
+            resultArea.innerHTML = "Loading...";
+        }
+
+        let resultArea2 = document.getElementById("result-info");
+
+        const restaurant = this.dataStore.get("restaurant");
+
+        if (restaurant) {
+            resultArea.innerHTML = `
+                <h5>Restaurant Name: ${restaurant.restaurantName}</h5>
+                <div>Restaurant ID: ${restaurant.restaurantId}</div>
+                <div>Restaurant Rating: ${restaurant.rating}</div>
+                <div>Status: ${restaurant.status}</div>
+                <div>Type of Cuisine: ${restaurant.cuisine}</div>
+                <div>Location: ${restaurant.location}</div>
+                <div>Menu: ${restaurant.menu}</div>
+            `;
+            let menuHTML = "<ul>";
+            for (let item of restaurant.menu) {
+                menuHTML += `<li>
+                <div>item<div>
+                </li>`;
+            }
+            resultArea.innerHTML += menuHTML + "</ul>"
+        } else {
+            resultArea2.innerHTML = "No Restaurant Selected";
         }
     }
 
@@ -58,29 +79,35 @@ class RestaurantPage extends BaseClass {
         this.dataStore.set("restaurants", result);
     }
 
-//    async onCreate(event) {
-//        // Prevent the page from refreshing on form submit
-//        event.preventDefault();
-//        this.dataStore.set("example", null);
-//
-//        let name = document.getElementById("create-name-field").value;
-//
-//        const createdExample = await this.client.createExample(name, this.errorHandler);
-//        this.dataStore.set("example", createdExample);
-//
-//        if (createdExample) {
-//            this.showMessage(`Created ${createdExample.name}!`)
-//        } else {
-//            this.errorHandler("Error creating!  Try again...");
-//        }
-//    }
+    async onGetRestaurantById(event) {
+        let restaurantId = document.getElementById('restaurant-id').value;
+        let result = await this.client.getRestaurant(restaurantId, this.errorHandler);
+        this.dataStore.set("restaurant", result);
+    }
+
+    async generateRestaurants(event) {
+        event.preventDefault();
+
+        const restaurant1 = await this.client.createRestaurant('1','5', 'McBonalds', 'OPEN', 'Indian', 'New York, NY', ['Tandoori Chicken', 'Lamb Curry', 'Chicken Tikka Masala']);
+        const restaurant2 = await this.client.createRestaurant('2','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant3 = await this.client.createRestaurant('3','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant4 = await this.client.createRestaurant('4','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant5 = await this.client.createRestaurant('5','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant6 = await this.client.createRestaurant('6','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant7 = await this.client.createRestaurant('7','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant8 = await this.client.createRestaurant('8','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant9 = await this.client.createRestaurant('9','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant10 = await this.client.createRestaurant('10','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+
+
+    }
 }
 
 /**
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const examplePage = new RestaurantPage();
+    const restaurantPage = new RestaurantPage();
     restaurantPage.mount();
 };
 
