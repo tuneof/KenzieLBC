@@ -16,7 +16,10 @@
         Welcome to Yummy Food. We will present you with the best Restaurants available!
     </p>
     <div class="card">
-        <h3>Restaurants</h3>
+        <h2>Restaurants</h2>
+        <form class="card-content" id="generate-restaurants">
+            <button type="submit">Generate Restaurants</button>
+        </form>
         <form class="card-content" id="get-restaurants">
             <button type="submit">Display Restaurants</button>
         </form>
@@ -25,8 +28,8 @@
         <h3>Restaurant Details</h3>
         <form class="card-content" id="get-by-restaurant-id">
             <p class="form-field">
-                <label>Find Out More About A Restaurant</label>
-                <input type="text" required class="validated-field" id="restaurant-id">
+                <label>Discover more about a restaurant</label>
+                <input type="text" required class="validated-field" id="restaurant-id" placeholder="Restaurant ID goes here...">
             </p>
             <button type="submit">Discover</button>
         </form>

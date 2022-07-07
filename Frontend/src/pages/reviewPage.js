@@ -102,7 +102,7 @@ class ReviewPage extends BaseClass {
             } else {
                 this.errorHandler("Review was not created. Try Again.");
             }
-            this.onGetReviews;
+            this.onGetReviews();
         }
 
         async onUpdate(event) {
@@ -123,7 +123,7 @@ class ReviewPage extends BaseClass {
                 this.errorHandler("Review was not updated. Try Again.");
             }
             // Re-displays all Reviews
-            this.onGetReviews;
+            this.onGetReviews();
         }
 
         async onDelete(event) {
@@ -142,7 +142,7 @@ class ReviewPage extends BaseClass {
                 this.errorHandler("Could not find Review. Try Again.");
             }
             // Re-displays all Reviews
-            this.onGetReviews;
+            this.onGetReviews();
         }
 }
 

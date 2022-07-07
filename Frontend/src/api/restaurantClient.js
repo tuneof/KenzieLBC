@@ -61,7 +61,7 @@ export default class RestaurantClient extends BaseClass {
             });
             return response.data;
         } catch (error) {
-            this.handleError("createExample", error, errorCallback);
+            this.handleError("createRestaurant", error, errorCallback);
         }
     }
 
