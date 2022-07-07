@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class RestaurantService {
@@ -21,6 +22,9 @@ public class RestaurantService {
     }
 
     public Restaurant findById(String id) {
+        if ((Objects.equals(id, "")) || id == null) {
+            throw new RestaurantRecordNotFoundException();
+        }
         Restaurant restaurantFromBackend = restaurantRepository
                 .findById(id)
                 .map(restaurant -> new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(),

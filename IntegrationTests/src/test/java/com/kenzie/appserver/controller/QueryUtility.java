@@ -1,6 +1,7 @@
 package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kenzie.appserver.controller.model.RestaurantCreateRequest;
 import com.kenzie.appserver.controller.model.ReviewCreateRequest;
 import com.kenzie.appserver.controller.model.ReviewUpdateRequest;
 import org.springframework.http.MediaType;
@@ -28,6 +29,17 @@ public class QueryUtility {
                     .accept(MediaType.APPLICATION_JSON));
         }
 
+        public ResultActions getRestaurantByRestaurantId(String restaurantId) throws Exception {
+            return mvc.perform(get("/restaurants/{restaurantId}", restaurantId)
+                    .accept(MediaType.APPLICATION_JSON));
+        }
+
+        public ResultActions addRestaurant(RestaurantCreateRequest createRequest) throws Exception {
+            return mvc.perform(post("/restaurants/")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(mapper.writeValueAsString(createRequest)));
+        }
     }
 
     public class ReviewControllerClient {
