@@ -37,7 +37,7 @@ class RestaurantPage extends BaseClass {
             let restaurantHTML = "<ul>";
             for (let restaurant of restaurants) {
                 restaurantHTML += `<li>
-                <h5>Restaurant Name: ${restaurant.restaurantName}</h5>
+                <h4>Restaurant Name: ${restaurant.restaurantName}</h4>
                 <div>Restaurant ID: ${restaurant.restaurantId}</div>
                 <div>Restaurant Rating: ${restaurant.rating}</div>
                 </li>`;
@@ -91,26 +91,26 @@ class RestaurantPage extends BaseClass {
     async generateRestaurants(event) {
         event.preventDefault();
 
-        const restTest = await this.client.createRestaurant('2', '5', 'name', 'status', 'cuisine', 'location', 'menu');
-        const restaurant1 = await this.client.createRestaurant('1','5', 'McBonalds', 'OPEN', 'Indian', 'New York, NY', ['Tandoori Chicken', 'Lamb Curry', 'Chicken Tikka Masala']);
+
+        const restaurant1 = await this.client.createRestaurant('1', 'McBonalds', '5', 'OPEN', 'Indian', 'New York, NY', ['Tandoori Chicken', 'Lamb Curry', 'Chicken Tikka Masala']);
         //this.dataStore.set("restaurants", restaurant1);
-        const restaurant2 = await this.client.createRestaurant('2','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant2 = await this.client.createRestaurant('2', 'KBBQ All You Can Eat', '4', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
         //this.dataStore.set("restaurants", restaurant2);
-        const restaurant3 = await this.client.createRestaurant('3','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant3 = await this.client.createRestaurant('3', 'Grandmas Breakfast Diner', '1', 'CLOSED', 'American', 'Queens, NY', ['Egg Benedict', 'Countryside Omelette', 'Belgian Waffle']);
         //this.dataStore.set("restaurants", restaurant3);
-        const restaurant4 = await this.client.createRestaurant('4','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant4 = await this.client.createRestaurant('4', 'Downtown Taco', '3', 'OPEN', 'Mexican', 'The Bronx, NY', ['Buffalo Chicken Taco', 'Steak Quesadilla', 'BBQ Chicken Taco']);
         //this.dataStore.set("restaurants", restaurant4);
-        const restaurant5 = await this.client.createRestaurant('5','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant5 = await this.client.createRestaurant('5','Eight China', '5', 'OPEN', 'Chinese', 'Staten Island, NY', ['Peking Roasted Duck', 'Kung Pao Chicken', 'Ma Po Tofu']);
         //this.dataStore.set("restaurants", restaurant5);
-        const restaurant6 = await this.client.createRestaurant('6','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant6 = await this.client.createRestaurant('6', 'Thai 202', '4', 'OPEN', 'Thai', 'New York, NY', ['Spicy Green Papaya Salad', 'Pad Thai', 'Tom Yum Goong']);
         //this.dataStore.set("restaurants", restaurant6);
-        const restaurant7 = await this.client.createRestaurant('7','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant7 = await this.client.createRestaurant('7', 'Michaels Trattoria', '5', 'OPEN', 'Italian', 'New York, NY', ['Penne alla Vodka', 'Linguini Mare Bello', 'Chicken Francese']);
         //this.dataStore.set("restaurants", restaurant7);
-        const restaurant8 = await this.client.createRestaurant('8','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant8 = await this.client.createRestaurant('8', 'Moonstone', '4', 'OPEN', 'Japanese', 'New York, NY', ['Spicy Tuna Roll', 'Miso Ramen', 'Kara Age-Don']);
         //this.dataStore.set("restaurants", restaurant8);
-        const restaurant9 = await this.client.createRestaurant('9','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant9 = await this.client.createRestaurant('9', 'Pho Legend', '3', 'OPEN', 'Vietnamese', 'New York, NY', ['Brisket Pho', 'BBQ Beef Banh Mi', 'Summer Roll']);
         //this.dataStore.set("restaurants", restaurant9);
-        const restaurant10 = await this.client.createRestaurant('10','4', 'KBBQ All You Can Eat', 'OPEN', 'Korean', 'Brooklyn, NY', ['Pork Belly', 'Prime Short Rib', 'Beef Short Ribs']);
+        const restaurant10 = await this.client.createRestaurant('10', 'Taverna Achates', '5', 'OPEN', 'Greek', 'New York, NY', ['Grilled Octopus', 'Chicken Souvlaki', 'Seafood Pasta']);
         //this.dataStore.set("restaurants", restaurant10);
 
         this.onGetRestaurants;
