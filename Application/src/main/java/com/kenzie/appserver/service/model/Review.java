@@ -1,5 +1,7 @@
 package com.kenzie.appserver.service.model;
 
+import com.kenzie.appserver.service.RatingOutOfBoundException;
+
 import java.util.Random;
 import java.util.UUID;
 

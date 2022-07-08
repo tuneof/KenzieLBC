@@ -47,6 +47,9 @@ public class ReviewService {
     }
 
     public Review addReview(Review review) {
+        if (Integer.parseInt(review.getRating()) > 5 || Integer.parseInt(review.getRating()) < 0) {
+            throw new RatingOutOfBoundException();
+        }
         ReviewRecord reviewRecord = toReviewRecord(review);
         reviewRepository.save(reviewRecord);
         return review;
@@ -81,9 +84,13 @@ public class ReviewService {
         if (review == null) {
             throw new ReviewRecordNotFoundException();
         }
-            ReviewRecord reviewRecord = toReviewRecord(review);
-            reviewRepository.save(reviewRecord);
-            return review;
-    }
 
+        if (Integer.parseInt(review.getRating()) > 5 || Integer.parseInt(review.getRating()) < 0) {
+            throw new RatingOutOfBoundException();
+        }
+
+        ReviewRecord reviewRecord = toReviewRecord(review);
+        reviewRepository.save(reviewRecord);
+        return review;
+    }
 }
