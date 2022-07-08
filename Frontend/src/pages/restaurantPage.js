@@ -18,7 +18,7 @@ class RestaurantPage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-restaurants').addEventListener('submit', this.onGetRestaurants);
-        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGetRestaurant);
+        document.getElementById('get-by-restaurant-id').addEventListener('submit', this.onGetRestaurantById);
         document.getElementById('generate-restaurants').addEventListener('submit', this.generateRestaurants);
         this.client = new RestaurantClient();
 
@@ -53,21 +53,21 @@ class RestaurantPage extends BaseClass {
 
         if (restaurant) {
             resultArea.innerHTML = `
-                <h5>Restaurant Name: ${restaurant.restaurantName}</h5>
+                <h4>Restaurant Name: ${restaurant.restaurantName}</h4>
                 <div>Restaurant ID: ${restaurant.restaurantId}</div>
                 <div>Restaurant Rating: ${restaurant.rating}</div>
                 <div>Status: ${restaurant.status}</div>
                 <div>Type of Cuisine: ${restaurant.cuisine}</div>
                 <div>Location: ${restaurant.location}</div>
-                <div>Menu: ${restaurant.menu}</div>
+                <div>Menu:</div>
             `;
-//            let menuHTML = "<ul>";
-//            for (let item of restaurant.menu) {
-//                menuHTML += `<li>
-//                <div>item<div>
-//                </li>`;
-//            }
-//            resultArea.innerHTML += menuHTML + "</ul>"
+            let menuHTML = '<ul style="margin-top:-1px;">';
+            for (let item of restaurant.menu) {
+                menuHTML += `<li>
+                <div>${item}<div>
+                </li>`;
+            }
+            resultArea.innerHTML += menuHTML + "</ul>"
         } else {
             resultArea2.innerHTML = "No Restaurant Selected";
         }
