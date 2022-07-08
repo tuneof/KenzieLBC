@@ -37,10 +37,10 @@ class RestaurantPage extends BaseClass {
             let restaurantHTML = "<ul>";
             for (let restaurant of restaurants) {
                 restaurantHTML += `<li>
-                <h4>Restaurant Name: ${restaurant.restaurantName}</h4>
+                <div><strong>Restaurant Name: ${restaurant.restaurantName}</strong></div>
                 <div>Restaurant ID: ${restaurant.restaurantId}</div>
                 <div>Restaurant Rating: ${restaurant.rating}</div>
-                </li>`;
+                </li></br>`;
             }
             resultArea.innerHTML = restaurantHTML + "</ul>";
         } else {
@@ -61,13 +61,13 @@ class RestaurantPage extends BaseClass {
                 <div>Location: ${restaurant.location}</div>
                 <div>Menu: ${restaurant.menu}</div>
             `;
-            let menuHTML = "<ul>";
-            for (let item of restaurant.menu) {
-                menuHTML += `<li>
-                <div>item<div>
-                </li>`;
-            }
-            resultArea.innerHTML += menuHTML + "</ul>"
+//            let menuHTML = "<ul>";
+//            for (let item of restaurant.menu) {
+//                menuHTML += `<li>
+//                <div>item<div>
+//                </li>`;
+//            }
+//            resultArea.innerHTML += menuHTML + "</ul>"
         } else {
             resultArea2.innerHTML = "No Restaurant Selected";
         }

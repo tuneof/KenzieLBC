@@ -44,7 +44,7 @@ export default class RestaurantClient extends BaseClass {
             const response = await this.client.get(`/restaurants/${restaurantId}`);
             return response.data;
         } catch (error) {
-            this.handleError("getConcert", error, errorCallback)
+            this.handleError("getRestaurant", error, errorCallback)
         }
     }
 
