@@ -112,7 +112,7 @@ class RestaurantPage extends BaseClass {
         const restaurant10 = await this.client.createRestaurant('10', 'Taverna Achates', '5', 'OPEN', 'Greek', 'New York, NY', ['Grilled Octopus', 'Chicken Souvlaki', 'Seafood Pasta']);
         //this.dataStore.set("restaurants", restaurant10);
 
-        this.onGetRestaurants;
+        this.onGetRestaurants();
     }
 }
 
