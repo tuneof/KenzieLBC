@@ -47,7 +47,7 @@ class RestaurantPage extends BaseClass {
             resultArea.innerHTML = "Loading...";
         }
 
-        let resultArea2 = document.getElementById("result-info");
+        let resultArea2 = document.getElementById("restaurant-result-info2");
 
         const restaurant = this.dataStore.get("restaurant");
 
