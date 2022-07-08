@@ -23,15 +23,6 @@ public class RestaurantCreateRequest {
     @JsonProperty("menu")
     private List<String> menu;
 
-
-    public String getName() {
-        return restaurantId;
-    }
-
-    public void setName(String name) {
-        this.restaurantId = name;
-    }
-
     public String getRestaurantId() {
         return restaurantId;
     }

@@ -25,14 +25,17 @@ public class RestaurantService {
         if ((Objects.equals(id, "")) || id == null) {
             throw new RestaurantRecordNotFoundException();
         }
-        Restaurant restaurantFromBackend = restaurantRepository
+
+        return restaurantRepository
                 .findById(id)
-                .map(restaurant -> new Restaurant(restaurant.getRestaurantId(), restaurant.getRestaurantName(),
-                        restaurant.getRating(), restaurant.getStatus(), restaurant.getCuisine(), restaurant.getLocation(),
+                .map(restaurant -> new Restaurant(restaurant.getRestaurantId(),
+                        restaurant.getRestaurantName(),
+                        restaurant.getRating(),
+                        restaurant.getStatus(),
+                        restaurant.getCuisine(),
+                        restaurant.getLocation(),
                         restaurant.getMenu()))
                 .orElse(null);
-
-        return restaurantFromBackend;
     }
 
     public List<Restaurant> findAll() {
