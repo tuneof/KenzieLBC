@@ -67,16 +67,12 @@
     display: flex;
     justify-content: left;
     flex-direction: column;
-        border-style: double;
-        border-color: #a7f542
 }
 
 .container2 {
     display: flex;
     justify-content: right;
     flex-direction: row;
-        border-style: double;
-        border-color: #a7f542;
 }
 
 .card {
@@ -85,7 +81,7 @@
     margin: 20px;
     padding: 10px 30px;
             border-style: solid;
-            border-color: #FF1493;
+            border-color: #813923;
 }
 
 .validated-field:invalid {
