@@ -23,7 +23,6 @@
     color: var(--secondary-color);
     padding: 0 20px;
 }
-
 .header_home {
     font-size: 36px;
     line-height: 55px;
@@ -81,6 +80,8 @@
     background-color: var(--secondary-color);
     margin: 20px;
     padding: 10px 30px;
+            border-style: solid;
+            border-color: #813923;
 }
 
 .validated-field:invalid {

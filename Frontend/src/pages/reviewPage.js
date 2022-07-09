@@ -26,7 +26,7 @@ class ReviewPage extends BaseClass {
         this.client = new ReviewClient();
 
         this.dataStore.addChangeListener(this.renderReview)
-        this.dataStore.addChangeListener(this.renderSingleReview)
+//        this.dataStore.addChangeListener(this.renderSingleReview)
         this.onGetReviews();
     }
 
@@ -40,11 +40,15 @@ class ReviewPage extends BaseClass {
         if (reviews) {
             let reviewHTML = "<ul>";
             for (let review of reviews) {
+                if (!review) {
+                    continue;
+                }
+
                 reviewHTML += `<li>
-                <h3>Restaurant id: ${review.restaurantId}</h3>
-                <h4>User id: ${review.userId}</h4>
-                <h4>rating: ${review.rating}</h4>
-                <h4>review: ${review.review}</h4>
+                <h4>Restaurant Id: ${review.restaurantId}</h4>
+                <div>User Id: ${review.userId}</div>
+                <div>Rating: ${review.rating}</div>
+                <div>Review: ${review.review}</div>
                 </li>`;
             }
             resultArea.innerHTML = reviewHTML + "</ul>";
@@ -64,7 +68,8 @@ class ReviewPage extends BaseClass {
                 <div>Review Written: ${review.review}</div>
             `;
         } else {
-            resultArea2.innerHTML = "No Reviews";
+            if (resultArea2)
+                resultArea2.innerHTML = "No Reviews";
         }
     }
 
@@ -95,7 +100,7 @@ class ReviewPage extends BaseClass {
 
             const createdReview = await this.client.addReview(restaurantId, userId, rating, review, this.errorHandler);
 
-            this.dataStore.set("reviews", createdReview);
+            this.dataStore.set("reviews", [createdReview]);
 
             if (createdReview) {
                 this.showMessage("Created a review!")
@@ -115,7 +120,7 @@ class ReviewPage extends BaseClass {
 
             const createdReview = await this.client.updateReview(restaurantId, userId, rating, review, this.errorHandler);
 
-            this.dataStore.set("reviews", createdReview);
+            this.dataStore.set("reviews", [createdReview]);
 
             if (createdReview) {
                 this.showMessage("Review Updated!")
@@ -134,7 +139,7 @@ class ReviewPage extends BaseClass {
 
             const reviewToDelete = await this.client.deleteReview(restaurantId, this.errorHandler);
 
-            this.dataStore.set("reviews", reviewToDelete);
+            this.dataStore.set("reviews", [reviewToDelete]);
 
             if (reviewToDelete) {
                 this.showMessage("The Review has been deleted!")
