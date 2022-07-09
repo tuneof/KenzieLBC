@@ -8,28 +8,36 @@
 <body class="background">
 <header class="header" id="header">
     <div class="site-title">
+        <img src="https://i.imgur.com/X2hQX7y.png" alt="logo">
         <a class="header_home" href="review.html">Yummy Food</a>
         <a class="header_nav_link button" href="index.html">Find a Restaurant</a>
     </div>
 </header>
+<div class="container">
+    <div class="container3">
+        <div class="card">
+            <h2>All Restaurant Reviews</h2>
+            <form class="card-content" id="get-reviews">
+                <button type="submit">Get All</button>
+            </form>
+            <h2>Get reviews by Id</h2>
+            <form class="card-content" id="get-reviews-by-restaurantId">
+                <p class="form-field">
+                    <label>Restaurant ID</label>
+                    <input type="text" required class="validated-field" id="get-review-restaurantId">
+                </p>
+                <button type="submit">Get By Restaurant Id</button>
+            </form>
+            <h2>Delete a Review</h2>
+            <form class="card-content" id="delete-reviews">
+                <p class="form-field">
+                    <label>Restaurant ID</label>
+                    <input type="text" required class="validated-field" id="delete-review-restaurantId">
+                </p>
+                <button type="submit">Delete</button>
+            </form>
+        </div>
 <div class="card">
-    <h1>Reviews</h1>
-    <form class="card-content" id="get-reviews">
-        <button type="submit">Get All</button>
-    </form>
-</div>
-<div class="card">
-    <h2>Get reviews by Id</h2>
-    <form class="card-content" id="get-reviews-by-restaurantId">
-        <p class="form-field">
-            <label>Restaurant ID</label>
-            <input type="text" required class="validated-field" id="get-review-restaurantId">
-        </p>
-    </form>
-</div>
-<div class="card">
-    <button type="submit">Get By Restaurant Id</button>
-    </form>
     <h2>Create a Review</h2>
     <form class="card-content" id="create-reviews">
         <p class="form-field">
@@ -68,7 +76,8 @@
         </p>
         <p class="form-field">
             <label>Rating</label>
-            <input type="text" required class="validated-field" id="update-review-rating" placeholder="Number (1-5)">
+            <input type="text" required class="validated-field" id="update-review-rating"
+                   placeholder="Number (1-5)">
         </p>
         <p class="form-field">
             <label>Review</label>
@@ -76,21 +85,6 @@
         </p>
         <button type="submit">Update</button>
     </form>
-</div>
-<div class="card">
-    <h2>Delete a Review</h2>
-    <form class="card-content" id="delete-reviews">
-        <p class="form-field">
-            <label>Restaurant ID</label>
-            <input type="text" required class="validated-field" id="delete-review-restaurantId">
-        </p>
-        <!--            <p class="form-field">-->
-        <!--                <label>User ID</label>-->
-        <!--                <input type="text" required class="validated-field" id="delete-review-userId">-->
-        <!--            </p>-->
-        <button type="submit">Delete</button>
-    </form>
-    <br/><br/>
 </div>
 <div class="card" id="result">
     <h2>Restaurant Reviews:</h2>

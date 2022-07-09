@@ -23,7 +23,6 @@
     color: var(--secondary-color);
     padding: 0 20px;
 }
-
 .header_home {
     font-size: 36px;
     line-height: 55px;
@@ -68,12 +67,16 @@
     display: flex;
     justify-content: left;
     flex-direction: column;
+        border-style: double;
+        border-color: #a7f542
 }
 
 .container2 {
     display: flex;
     justify-content: right;
     flex-direction: row;
+        border-style: double;
+        border-color: #a7f542;
 }
 
 .card {
@@ -81,6 +84,8 @@
     background-color: var(--secondary-color);
     margin: 20px;
     padding: 10px 30px;
+            border-style: solid;
+            border-color: #FF1493;
 }
 
 .validated-field:invalid {

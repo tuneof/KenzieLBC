@@ -47,8 +47,8 @@ class ReviewPage extends BaseClass {
                 reviewHTML += `<li>
                 <h3>Restaurant id: ${review.restaurantId}</h3>
                 <h4>User id: ${review.userId}</h4>
-                <h4>rating: ${review.rating}</h4>
-                <h4>review: ${review.review}</h4>
+                <h4>Rating: ${review.rating}</h4>
+                <h4>Review: ${review.review}</h4>
                 </li>`;
             }
             resultArea.innerHTML = reviewHTML + "</ul>";
