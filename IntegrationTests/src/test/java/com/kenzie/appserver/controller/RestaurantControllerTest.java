@@ -83,4 +83,12 @@ class RestaurantControllerTest {
         queryUtility.restaurantControllerClient.getRestaurantByRestaurantId(restaurantId)
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void getRestaurant_RestaurantDoesNotExist() throws Exception {
+        String restaurantId = mockNeat.strings().valStr();
+
+        queryUtility.restaurantControllerClient.getRestaurantByRestaurantId(restaurantId)
+                .andExpect(status().isNotFound());
+    }
 }
