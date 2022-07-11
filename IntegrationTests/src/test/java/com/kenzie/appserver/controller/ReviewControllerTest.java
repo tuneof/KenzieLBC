@@ -62,7 +62,7 @@ public class ReviewControllerTest {
         String review = mockNeat.strings().valStr();
         String rating = "5";
 
-        Review userReview = new Review(restaurantId,userId, review, rating);
+        Review userReview = new Review(restaurantId,userId, rating, review);
         Review persistedUserReview = reviewService.addReview(userReview);
 
         queryUtility.reviewControllerClient.deleteReview(persistedUserReview.getRestaurantId())
@@ -76,7 +76,7 @@ public class ReviewControllerTest {
         String review = mockNeat.strings().valStr();
         String rating = "5";
 
-        Review userReview = new Review(restaurantId,userId, review, rating);
+        Review userReview = new Review(restaurantId,userId, rating, review);
         Review persistedUserReview = reviewService.addReview(userReview);
 
         String newReview = mockNeat.strings().valStr();
@@ -104,8 +104,8 @@ public class ReviewControllerTest {
         String review2 = mockNeat.strings().valStr();
         String rating2 = "4";
 
-        Review userReview1 = new Review(restaurantId, userId, review, rating);
-        Review userReview2 = new Review(restaurantId2, userId2, review2, rating2);
+        Review userReview1 = new Review(restaurantId, userId, rating, review);
+        Review userReview2 = new Review(restaurantId2, userId2, rating2, review2);
 
         reviewService.addReview(userReview1);
         reviewService.addReview(userReview2);
