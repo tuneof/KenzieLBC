@@ -49,7 +49,7 @@ class RestaurantControllerTest {
         String restaurantId = "11";
         String restaurantName = mockNeat.strings().valStr();
         String status = mockNeat.strings().valStr();
-        String rating = mockNeat.strings().valStr();
+        String rating = "4";
         String cuisine = mockNeat.strings().valStr();
         String location = mockNeat.strings().valStr();
         List<String> menu = Arrays.asList(mockNeat.strings().valStr(), mockNeat.strings().valStr(), mockNeat.strings().valStr());
@@ -71,7 +71,7 @@ class RestaurantControllerTest {
         String restaurantId = "12";
         String restaurantName = mockNeat.strings().valStr();
         String status = mockNeat.strings().valStr();
-        String rating = mockNeat.strings().valStr();
+        String rating = "3";
         String cuisine = mockNeat.strings().valStr();
         String location = mockNeat.strings().valStr();
         List<String> menu = Arrays.asList(mockNeat.strings().valStr(), mockNeat.strings().valStr(), mockNeat.strings().valStr());

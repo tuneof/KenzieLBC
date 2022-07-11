@@ -61,6 +61,15 @@ public class ReviewServiceTest {
     }
 
     @Test
+    void addReview_invalidRating_throwsException() {
+        Review invalidReview = new Review("3", "tune", "8", "bad review");
+        Review invalidReview2 = new Review("3", "tune", "-1", "bad review");
+
+        assertThrows(RatingOutOfBoundException.class, () -> reviewService.addReview(invalidReview));
+        assertThrows(RatingOutOfBoundException.class, () -> reviewService.addReview(invalidReview2));
+    }
+
+    @Test
     void deleteReview_validReview_reviewDeleted() {
         //GIVEN
         String restaurantId = "1";
@@ -130,6 +139,27 @@ public class ReviewServiceTest {
     }
 
     @Test
+    void updateReview_invalidRating_throwsException() {
+        Review validReview = new Review("3", "tune", "3", "good review");
+        Review invalidReview = new Review("3", "tune", "7", "bad review");
+        Review invalidReview2 = new Review("3", "tune", "-1", "bad review");
+        ReviewRecord reviewRecord = new ReviewRecord();
+        reviewRecord.setRestaurantId(invalidReview.getRestaurantId());
+        reviewRecord.setUserId(invalidReview.getUserId());
+        reviewRecord.setRating(invalidReview.getRating());
+        reviewRecord.setReview(invalidReview.getReview());
+
+        ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
+
+        when(reviewRepository.save(any(ReviewRecord.class))).then(i -> i.getArgumentAt(0, ReviewRecord.class));
+
+        reviewService.addReview(validReview);
+
+        assertThrows(RatingOutOfBoundException.class, () -> reviewService.updateReview(invalidReview));
+        assertThrows(RatingOutOfBoundException.class, () -> reviewService.updateReview(invalidReview2));
+    }
+
+    @Test
     void findByRestaurantId_validRestaurantId_reviewsReturned() {
         //GIVEN
         String restaurantId = "1";
@@ -161,6 +191,21 @@ public class ReviewServiceTest {
 
         //WHEN //THEN
         assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.findByRestaurantId(null));
+    }
+
+    @Test
+    void findByRestaurantId_nonExistingRestaurant_throwsException() {
+        Review userReview = new Review("2", "123", "4", "Nice Place");
+
+        ReviewRecord record = new ReviewRecord();
+        record.setRestaurantId(userReview.getRestaurantId());
+        record.setUserId(userReview.getUserId());
+        record.setRating(userReview.getRating());
+        record.setReview(userReview.getReview());
+
+        when(reviewRepository.findById(userReview.getRestaurantId())).thenReturn(Optional.of(record));
+
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.findByRestaurantId("1"));
     }
 
     @Test
