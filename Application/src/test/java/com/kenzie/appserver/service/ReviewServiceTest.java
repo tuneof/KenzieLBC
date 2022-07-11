@@ -82,6 +82,7 @@ public class ReviewServiceTest {
         record.setUserId(userId);
         record.setRating(rating);
         record.setReview(review);
+        when(reviewRepository.findById(restaurantId)).thenReturn(Optional.of(record));
 
         //WHEN
         reviewService.deleteReview(restaurantId);
@@ -96,6 +97,14 @@ public class ReviewServiceTest {
 
         //WHEN //THEN
         assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.deleteReview(null));
+    }
+
+    @Test
+    void deleteReview_nonExistentReview_throwsException() {
+        //GIVEN
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.deleteReview("500"));
     }
 
     @Test
@@ -114,7 +123,8 @@ public class ReviewServiceTest {
         record1.setReview(review1);
 
         ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
-        when(reviewRepository.save(any())).thenReturn(record1);
+        when(reviewRepository.findById(restaurantId1)).thenReturn(Optional.of(record1));
+        when(reviewRepository.save(record1)).thenReturn(record1);
 
         // WHEN
         Review returnedReview = reviewService.updateReview(userReview);
@@ -139,6 +149,16 @@ public class ReviewServiceTest {
     }
 
     @Test
+    void updateReview_nonExistentReview_throwsException() {
+        //GIVEN
+        Review review = new Review("500", "1", "3", "Good");
+        when(reviewRepository.findById("500")).thenReturn(null);
+
+        //WHEN //THEN
+        assertThrows(ReviewRecordNotFoundException.class, () -> reviewService.updateReview(review));
+    }
+
+    @Test
     void updateReview_invalidRating_throwsException() {
         Review validReview = new Review("3", "tune", "3", "good review");
         Review invalidReview = new Review("3", "tune", "7", "bad review");
@@ -151,6 +171,7 @@ public class ReviewServiceTest {
 
         ArgumentCaptor<ReviewRecord> reviewRecordCaptor = ArgumentCaptor.forClass(ReviewRecord.class);
 
+        when(reviewRepository.findById("3")).thenReturn(Optional.of(reviewRecord));
         when(reviewRepository.save(any(ReviewRecord.class))).then(i -> i.getArgumentAt(0, ReviewRecord.class));
 
         reviewService.addReview(validReview);
