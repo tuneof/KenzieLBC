@@ -62,7 +62,7 @@ class ReviewPage extends BaseClass {
 
         if (review) {
             resultArea.innerHTML = `
-                <div>Restaurant ID: ${review.restaurantId}</div>
+                <div><strong>Restaurant ID: ${review.restaurantId}</strong></div>
                 <div>By User ID: ${review.userId}</div>
                 <div>Rating for Restaurant: ${review.rating}</div>
                 <div>Review Written: ${review.review}</div>
