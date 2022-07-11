@@ -135,7 +135,6 @@ class ReviewPage extends BaseClass {
             event.preventDefault();
 
             let restaurantId = document.getElementById("delete-review-restaurantId").value;
-//            let userId = document.getElementById("delete-review-userId").value;
 
             const reviewToDelete = await this.client.deleteReview(restaurantId, this.errorHandler);
 

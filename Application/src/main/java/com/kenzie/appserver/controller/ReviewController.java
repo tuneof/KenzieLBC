@@ -84,8 +84,9 @@ public class ReviewController {
     @DeleteMapping("/{restaurantId}")
     public ResponseEntity<ReviewResponse> deleteReview(@PathVariable("restaurantId") String restaurantId) {
         Review review = reviewService.findByRestaurantId(restaurantId);
+        ReviewResponse reviewResponse = reviewToResponse(review);
         reviewService.deleteReview(restaurantId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(reviewResponse);
     }
 
     private ReviewResponse reviewToResponse (Review review) {

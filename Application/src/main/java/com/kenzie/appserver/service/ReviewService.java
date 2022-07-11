@@ -74,14 +74,14 @@ public class ReviewService {
     }
 
     public void deleteReview(String restaurantId) {
-        if (restaurantId == null) {
+        if (restaurantId == null || findByRestaurantId(restaurantId) == null) {
             throw new ReviewRecordNotFoundException();
         }
         reviewRepository.deleteById(restaurantId);
     }
 
     public Review updateReview(Review review) {
-        if (review == null) {
+        if (review == null || findByRestaurantId(review.getRestaurantId()) == null) {
             throw new ReviewRecordNotFoundException();
         }
 
