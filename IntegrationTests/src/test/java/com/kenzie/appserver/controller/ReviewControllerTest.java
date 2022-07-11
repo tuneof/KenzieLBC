@@ -115,8 +115,16 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void can_get_restaurants() throws Exception {
+    public void can_get_all_reviews() throws Exception {
         queryUtility.reviewControllerClient.getReviews()
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getReview_ReviewDoesNotExist() throws Exception {
+        String restaurantId = mockNeat.strings().valStr();
+
+        queryUtility.reviewControllerClient.getReviewsByRestaurantId(restaurantId)
+                .andExpect(status().isNotFound());
     }
 }
