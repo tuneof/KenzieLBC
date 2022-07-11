@@ -163,5 +163,6 @@ public class RestaurantServiceTest {
     @Test
     void findById_emptyRestaurantId_throwsException() {
         assertThrows(RestaurantRecordNotFoundException.class, () -> restaurantService.findById(null));
+        assertThrows(RestaurantRecordNotFoundException.class, () -> restaurantService.findById(""));
     }
 }
